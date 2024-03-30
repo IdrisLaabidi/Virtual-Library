@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './pages/LoginPage/loginPage';
 import Register from './pages/RegisterPage/registerPage';
 import Layout from './components/layout/layout';
+import AddItem from './pages/addItemPage/addItemPage'
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -53,6 +54,10 @@ function App() {
           <Route
             path="/home"
             element={<Layout darkMode={darkMode} children={<div>Home Page</div>} path="/home" />}
+          />
+          <Route
+            path="/addItem"
+            element={<Layout darkMode={darkMode}><AddItem/></Layout>}
           />
           <Route path="*" element={<div>error</div>} />
         </Routes>
