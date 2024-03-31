@@ -6,11 +6,11 @@ import useConnect from "../../Hooks/useConnect";
 const Layout = ({ children}) => {
   const [user , isLoading , error] = useConnect();
   return (
-    <div className="flex">
+    <div className="flex dark:bg-[#141a28]">
       <SideMenu/>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full ">
         <NavBar user={user}/>
-        <div className="px-4 py-6">{children}</div>
+        <div className="px-4 py-6 ">{children}</div>
       </div>
     </div>
   );

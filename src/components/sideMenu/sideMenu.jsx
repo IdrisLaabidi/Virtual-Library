@@ -1,48 +1,24 @@
 import React from 'react';
+import SideMenuItem from '../sideMenuItem/sideMenuItem';
 
 const SideMenu = () => {
+  const itemsArray = ['Home', 'My Account', 'My Library', 'FAQ', 'Feedback', 'Settings'];
+  
   return (
-    <aside className="w-64 ">
-      <div className="overflow-y-auto py-4 px-3 bg-white rounded shadow h-screen">
-      <div className="space-y-2 text-4xl px-1 mt-5 mb-10">
-            Virtual Library
+    <aside className="w-64">
+      <div className="h-screen overflow-y-auto py-4 px-3 bg-white dark:bg-[#1b2536] rounded shadow dark:text-white">
+        <div className="flex items-center justify-between px-1 mt-5 mb-10">
+          <img className="block h-8 lg:hidden" src='#' alt="Logo" />
+          <img className="hidden h-8 lg:block" src='#' alt="Logo" />
+          <span className="text-2xl font-semibold">Virtual Library</span>
         </div>
         <ul className="space-y-2">
-          <li>
-            <a href="#" className="flex items-center p-2 text-base font-normal text-gray-700 rounded-lg hover:bg-gray-100">
-              <span className="ml-3">Home</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center p-2 text-base font-normal text-gray-700 rounded-lg hover:bg-gray-100">
-              <span className="ml-3">Catalog</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center p-2 text-base font-normal text-gray-700 rounded-lg hover:bg-gray-100">
-              <span className="ml-3">My Account</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center p-2 text-base font-normal text-gray-700 rounded-lg hover:bg-gray-100">
-              <span className="ml-3">My Library</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center p-2 text-base font-normal text-gray-700 rounded-lg hover:bg-gray-100">
-              <span className="ml-3">Contact Us</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center p-2 text-base font-normal text-gray-700 rounded-lg hover:bg-gray-100">
-              <span className="ml-3">Feedback</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center p-2 text-base font-normal text-gray-700 rounded-lg hover:bg-gray-100">
-              <span className="ml-3">Settings</span>
-            </a>
-          </li>
+          {itemsArray.map((item, index) => (
+            <li key={index}>
+              <SideMenuItem item={item} itemLink={item.split(' ').join('')} />{/*used split-join to delete spaces between item lables 
+                                                                                to match link in app.jsx*/}
+            </li>
+          ))}
         </ul>
       </div>
     </aside>
