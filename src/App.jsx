@@ -55,6 +55,7 @@ function App() {
             path="/home"
             element={<Layout children={<div>Home Page</div>} path="/home" />}
           />
+          <Route path='/newItem' element={<Layout children={<AddItem/>}/>}/>
           <Route path="/myaccount" element={<Layout children={<MyAccountPage/>}/>}/>
           <Route path="*" element={<div>error</div>} />
         </Routes>
