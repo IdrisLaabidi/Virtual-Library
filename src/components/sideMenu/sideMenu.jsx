@@ -2,8 +2,8 @@ import React from 'react';
 
 const SideMenu = () => {
   return (
-    <aside className="w-64">
-      <div className="overflow-y-auto py-4 px-3 bg-white rounded shadow">
+    <aside className="w-64 ">
+      <div className="overflow-y-auto py-4 px-3 bg-white rounded shadow h-screen">
       <div className="space-y-2 text-4xl px-1 mt-5 mb-10">
             Virtual Library
         </div>
