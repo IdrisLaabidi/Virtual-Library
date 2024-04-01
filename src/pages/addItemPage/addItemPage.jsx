@@ -1,25 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie'
 
 const CreateItemPage = () => {
-  const [collection, setCollection] = useState('');
+  const [collection, setCollection] = useState([]);
+  const [selectedCollection, setSelectedCollection] = useState('Select a collection');
   const [itemType, setItemType] = useState('');
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
   const [edition, setEdition] = useState('');
   const [publicationDate, setPublicationDate] = useState('');
-  const [isbn10, setIsbn10] = useState('');
-  const [isbn13, setIsbn13] = useState('');
+  const [isbn, setIsbn] = useState('');
   const [pages, setPages] = useState('');
   const [price, setPrice] = useState('');
 
-  const handleSubmit = (e) => {
+  const token = Cookies.get("token")
+
+  useEffect(() => {
+    const fetchCollection = async () => {
+      const response = await fetch('http://localhost:4000/api/collection', {
+        method: 'GET',
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+token,
+        }
+      }
+      );
+      const data = await response.json();
+      setCollection(data.toutesLesCollections);
+    };
+    fetchCollection();
+  }, []);
+  console.log(collection)
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
+    const item={
+      collection: selectedCollection,
+      type: itemType,
+      titre: title,
+      auteur: author,
+      description,
+      editor: edition,
+      publicationDate,
+      isbn,
+      price,
+      pageNumber: pages
+    }
+    console.log(item)
+    try {
+      const response = await fetch('http://localhost:4000/api/item', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+token,
+        },
+        body: JSON.stringify(item),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  const inputClass = 'border border-gray-300 rounded-lg px-3 py-2 w-full text-gray-900 ';
-
+  
 
   return (
     <div 
@@ -32,7 +76,6 @@ const CreateItemPage = () => {
       </h1>
       <form 
         className="space-y-4 md:space-y-6" 
-        onSubmit={handleSubmit}
       >
         <div className='w-3/4'>
           <div className='mb-4 dark:text-white'>Collection:</div>
@@ -40,13 +83,15 @@ const CreateItemPage = () => {
             className='mb-6 dark:text-white'
           >
             <select 
-              value={collection} 
               className="border border-gray-300 rounded-lg px-3 py-2 w-full text-gray-900 dark:bg-gray-600 dark:text-white" 
-              onChange={(e) => setCollection(e.target.value)}
+              onChange={(e) => setSelectedCollection(e.target.value)}
             >
-              <option value="collection1">Collection 1</option>
-              <option value="collection2">Collection 2</option>
-              <option value="collection3">Collection 3</option>
+              <option key="select a collection" value="Select a collection" disabled>Select a collection...</option>
+              {collection.map((collection) => (
+                <option key={collection._id} value={collection._id}>
+                  {collection.title}
+                </option>
+              ))}
             </select>
           </label>          
         </div>
@@ -57,24 +102,24 @@ const CreateItemPage = () => {
               type="radio" 
               name="inputType" 
               value="film" 
-              onChange={(e) => setInputType(e.target.value)} 
+              onChange={(e) => setItemType(e.target.value)} 
               
             /> 
             <span className='dark:text-white'>Film</span>
             <input 
               type="radio" 
               name="inputType" 
-              value="book" 
+              value="livre" 
               className='ml-12' 
-              onChange={(e) => setInputType(e.target.value)} 
+              onChange={(e) => setItemType(e.target.value)} 
             /> 
             <span className='dark:text-white'>Book</span>
             <input 
               type="radio" 
               name="inputType" 
-              value="music" 
+              value="musique" 
               className='ml-12' 
-              onChange={(e) => setInputType(e.target.value)} 
+              onChange={(e) => setItemType(e.target.value)} 
             /> 
             <span className='dark:text-white'>Music</span>
           </label>
@@ -158,40 +203,22 @@ const CreateItemPage = () => {
             required 
           />
         </div>
-        <div className="w-3/4 flex space-x-4">
-          <div className="w-1/2">
+          <div className="w-3/4">
             <label 
               htmlFor="isbn10" 
               className="flex justify-start mb-2 text-sm font-medium dark:text-white"
             >
-              ISBN-10
+              ISBN
             </label>
             <input 
               type="text" 
               name="isbn10" 
               id="isbn10" 
-              onChange={(e) => setIsbn10(e.target.value)} 
+              onChange={(e) => setIsbn(e.target.value)} 
               className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
               required 
             />
           </div>
-          <div className="w-1/2">
-            <label 
-              htmlFor="isbn13" 
-              className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-            >
-              ISBN-13
-            </label>
-            <input 
-              type="text" 
-              name="isbn13" 
-              id="isbn13" 
-              onChange={(e) => setIsbn13(e.target.value)} 
-              className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-              required 
-            />
-          </div>
-        </div>
         <div className="w-3/4 flex space-x-4">
           <div className="w-1/2">
             <label 
@@ -229,6 +256,7 @@ const CreateItemPage = () => {
         <button 
           type="submit" 
           className="w-1/2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          onClick={handleSubmit}
         >
           Create Item
         </button>
