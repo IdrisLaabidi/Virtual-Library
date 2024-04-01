@@ -4,6 +4,7 @@ import Login from './pages/LoginPage/loginPage';
 import Register from './pages/RegisterPage/registerPage';
 import Layout from './components/layout/layout';
 import { useEffect, useState } from 'react';
+import Collection from './pages/collection/collectionPage';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -54,7 +55,9 @@ function App() {
             path="/home"
             element={<Layout darkMode={darkMode} children={<div>Home Page</div>} path="/home" />}
           />
-          <Route path="*" element={<div>error</div>} />
+          <Route path="/collection" element={<Collection/>} />
+           <Route path="*" element={<div>error</div>} />
+           
         </Routes>
       </BrowserRouter>
     </> 
