@@ -3,7 +3,7 @@ import React from 'react';
 const MyAccountPage = ({}) => {
   return (
    <div className=' dark:text-white'>
-    myAccount page
+      myAccount page
    </div>
   );
 };
