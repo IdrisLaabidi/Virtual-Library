@@ -1,16 +1,40 @@
 import React from 'react';
-import {useState } from 'react';
+import {useState}  from 'react';
+import Cookies from 'js-cookie'
 
 
 const Collection = () => {
   
   const [collectionTitle, setCollectionTitle] = React.useState('');
-  const [collectionLangage, setCollectionLangage] = React.useState('');
+  const [collectionLanguage, setCollectionLanguage] = React.useState('');
+  const [collectionItem, setCollectionItem] = React.useState('');
 
-  const handleSubmit = (e) => {
+  const token = Cookies.get("token")
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    const collection={
+      title:collectionTitle,
+      language:collectionLanguage,
+      items:setCollectionItem([])
+    }
     
-    console.log('Collection title submitted:', collectionTitle);
+    try {
+      const response = await fetch('http://localhost:4000/api/collection/addCollection', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+token,
+        },
+        body: JSON.stringify(collection),
+        credentials : "include"
+      });
+      const data = await response.json();
+      console.log('Collection submitted successfully:', data);
+    } catch (error) {
+      console.error(error);
+    }
+    
+    
   };
 
   return (
@@ -28,11 +52,11 @@ const Collection = () => {
         />
         <p className='text-sm'>40 character limit. For example: (My Books, Movie Wish Tape, Console Games, Family CD Collection).</p>
         <div></div>
-        <label htmlFor="collectionLangage" className="text-lg flex justify-start mb-2 text-sm font-medium dark:text-white">Collection Langage: </label>
+        <label htmlFor="collectionLanguage" className="text-lg flex justify-start mb-2 text-sm font-medium dark:text-white">Collection Language: </label>
         <select 
-              value={collectionLangage} 
+              value={collectionLanguage} 
               className="border border-gray-300 rounded-lg px-3 py-2 w-full text-gray-900 dark:bg-gray-600 dark:text-white" 
-              onChange={(e) => setCollectionLangage(e.target.value)}
+              onChange={(e) => setCollectionLanguage(e.target.value)}
             >
               <option value="langue1">French</option>
               <option value="langue2">English</option>
