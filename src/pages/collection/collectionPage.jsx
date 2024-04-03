@@ -50,7 +50,7 @@ const Collection = () => {
           value={collectionTitle}
           onChange={(e) =>setCollectionTitle(e.target.value)}
         />
-        <p className='text-sm'>40 character limit. For example: (My Books, Movie Wish Tape, Console Games, Family CD Collection).</p>
+        <p className='text-sm  dark:text-white'>40 character limit. For example: (My Books, Movie Wish Tape, Console Games, Family CD Collection).</p>
         <div></div>
         <label htmlFor="collectionLanguage" className="text-lg flex justify-start mb-2 text-sm font-medium dark:text-white">Collection Language: </label>
         <select 
