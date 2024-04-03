@@ -17,7 +17,7 @@ const MyAccountPage = () => {
   
   const navigate = useNavigate();
   const [user, isPending, error] = useConnect();
-
+  const [userPFP , setuserPFP] = useState('');
   useEffect(() => {
     if (!isPending && user) {
       setUserDetails({
@@ -38,6 +38,7 @@ const MyAccountPage = () => {
 
   const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
+    console.log(file.size)
     if (!(file && types.includes(file.type))){
       alert('Please select a valid image type (jgp or png)')
     }
@@ -124,13 +125,19 @@ const saveChangesHandler = async () => {
     e.preventDefault();
     saveChangesHandler();
   };
-
+  useEffect(()=>{
+    if(!isPending&&user){
+      setuserPFP(user.pictureURL)
+    }
+    
+  },[isPending,user])
   return (
-    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <div className="p-6 space-y-4 md:space-y-6 sm:p-8 flex flex-col items-center justify-center">
       <h1 className="text-xl font-bold dark:text-white mb-6">My Account</h1>
       <div className='relative w-[170px] h-[170px] overflow-hidden mb-[1rem] rounded-full'>
                 {/* Display profile picture mosta9bel */}
-                {profilePicture ? (
+                {console.log(userPFP)}
+                {(profilePicture) ? (
                     <img src={profilePicture} alt="Profile" className="w-full h-full object-cover" />
                 ) : (
                     <div className="flex justify-center items-center w-full h-full bg-[#ddd] text-gray-500 text-[1rem] font-bold ">Default Pic</div>
@@ -141,9 +148,10 @@ const saveChangesHandler = async () => {
                     accept="image/*"
                     onChange={handleProfilePictureChange}
                     className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer'
+                  
                 />
             </div>
-      <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 w-full pl-[200px]">
         <div className="w-3/4">
           <label htmlFor="firstName" className="block mb-2 text-sm font-medium dark:text-white">
             First Name
