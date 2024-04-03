@@ -6,6 +6,7 @@ import Layout from './components/layout/layout';
 import AddItem from './pages/addItemPage/addItemPage'
 import { useEffect, useState } from 'react';
 import MyAccountPage from './pages/myAccount/myAccount';
+import Home from './pages/HomePage/Home';
 import Collection from './pages/collection/collectionPage';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           <Route path="/register" element={<Register/>} />
           <Route
             path="/home"
-            element={<Layout children={<div>Home Page</div>} path="/home" />}
+            element={<Layout children={<Home/>} path="/home" />}
           />
           <Route path='/newItem' element={<Layout children={<AddItem/>}/>}/>
           <Route path="/myaccount" element={<Layout children={<MyAccountPage/>}/>}/>

@@ -19,7 +19,7 @@ const Collection = () => {
     }
     
     try {
-      const response = await fetch('http://localhost:4000/api/collection/addCollection', {
+      const response = await fetch('http://localhost:4000/api/collection', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,11 +58,11 @@ const Collection = () => {
               className="border border-gray-300 rounded-lg px-3 py-2 w-full text-gray-900 dark:bg-gray-600 dark:text-white" 
               onChange={(e) => setCollectionLanguage(e.target.value)}
             >
-              <option value="langue1">French</option>
-              <option value="langue2">English</option>
-              <option value="langue3">Italic</option>
-              <option value="langue3">Arabic</option>
-              <option value="langue3">German</option>
+              <option value="FR">French</option>
+              <option value="EN">English</option>
+              <option value="IT">Italian</option>
+              <option value="AR">Arabic</option>
+              <option value="DE">German</option>
             </select>
             <div class="flex items-center justify-center">
                 <button class="w-48 -m-0 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  text-center">
