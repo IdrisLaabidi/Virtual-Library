@@ -7,7 +7,7 @@ import AddItem from './pages/addItemPage/addItemPage'
 import { useEffect, useState } from 'react';
 import MyAccountPage from './pages/myAccount/myAccount';
 import Home from './pages/HomePage/Home';
-
+import MyLibraryPage from './pages/MyLibrary/myLibraryPage';
 function App() {
   return (
     <>
@@ -15,12 +15,10 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
-          <Route
-            path="/home"
-            element={<Layout children={<Home/>} path="/home" />}
-          />
+          <Route path="/home" element={<Layout children={<Home/>} path="/home" />}/>
           <Route path='/newItem' element={<Layout children={<AddItem/>}/>}/>
           <Route path="/myaccount" element={<Layout children={<MyAccountPage/>}/>}/>
+          <Route path="/MyLibrary" element={<Layout children={<MyLibraryPage/>}/>}/>
           <Route path="*" element={<div>error</div>} />
         </Routes>
       </BrowserRouter>
