@@ -41,7 +41,7 @@ const CreateItemPage = () => {
     let item;
     if (itemType === 'livre') {
       item = {
-        collection: selectedCollection,
+        group: selectedCollection,
         type: itemType,
         titre: title,
         auteur: author,
@@ -54,7 +54,7 @@ const CreateItemPage = () => {
       }
     } else {
       item = {
-        collection: selectedCollection,
+        group: selectedCollection,
         type: itemType,
         titre: title,
         auteur: author,
@@ -164,7 +164,7 @@ const CreateItemPage = () => {
             htmlFor="author" 
             className="flex justify-start mb-2 text-sm font-medium dark:text-white"
           >
-            Author
+            {itemType === 'livre' ? 'Author' : (itemType === 'musique' ? 'Artist' : 'Director')}
           </label>
           <input 
             type="text" 
