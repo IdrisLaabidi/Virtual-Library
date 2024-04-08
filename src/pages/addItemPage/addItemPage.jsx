@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie'
-
+import { useNavigate } from 'react-router-dom'
+import useFetch from '../../Hooks/useFetch';
 const CreateItemPage = () => {
   const [collection, setCollection] = useState([]);
-  const [selectedCollection, setSelectedCollection] = useState('Select a collection');
-  const [itemType, setItemType] = useState('');
+  const [selectedCollection, setSelectedCollection] = useState('select a collection');
+  const [itemType, setItemType] = useState('livre');
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
@@ -12,40 +13,46 @@ const CreateItemPage = () => {
   const [publicationDate, setPublicationDate] = useState('');
   const [isbn, setIsbn] = useState('');
   const [pages, setPages] = useState('');
+  const [duree, setDuree] = useState('');
   const [price, setPrice] = useState('');
-
+  const userId = localStorage.getItem('user_id')
   const token = Cookies.get("token")
-
+  const { data: userCollectionData, isPending, error } = useFetch(`http://localhost:4000/api/collection/${userId}`);
   useEffect(() => {
-    const fetchCollection = async () => {
-      const response = await fetch('http://localhost:4000/api/collection', {
-        method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+token,
-        }
-      }
-      );
-      const data = await response.json();
-      setCollection(data.toutesLesCollections);
-    };
-    fetchCollection();
-  }, []);
-  console.log(collection)
 
+      if(!isPending&&userCollectionData)
+      setCollection(userCollectionData);
+
+  }, [isPending,userCollectionData]);
+
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const item={
-      collection: selectedCollection,
-      type: itemType,
-      titre: title,
-      auteur: author,
-      description,
-      editor: edition,
-      publicationDate,
-      isbn,
-      price,
-      pageNumber: pages
+    let item;
+    if (itemType === 'livre') {
+      item = {
+        collection: selectedCollection,
+        type: itemType,
+        titre: title,
+        auteur: author,
+        description,
+        editor: edition,
+        publicationDate,
+        isbn,
+        price,
+        pageNumber: pages
+      }
+    } else {
+      item = {
+        collection: selectedCollection,
+        type: itemType,
+        titre: title,
+        auteur: author,
+        description,
+        publicationDate,
+        price,
+        duree: duree
+      }
     }
     console.log(item)
     try {
@@ -59,6 +66,7 @@ const CreateItemPage = () => {
       });
       const data = await response.json();
       console.log(data);
+      
     } catch (error) {
       console.error(error);
     }
@@ -111,6 +119,7 @@ const CreateItemPage = () => {
               name="inputType" 
               value="livre" 
               className='ml-12' 
+              defaultChecked
               onChange={(e) => setItemType(e.target.value)} 
             /> 
             <span className='dark:text-white'>Book</span>
@@ -171,88 +180,150 @@ const CreateItemPage = () => {
             required
           ></textarea>
         </div>
-        <div className='w-3/4'>
-          <label 
-            htmlFor="edition" 
-            className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-          >
-            Edition
-          </label>
-          <input 
-            type="text" 
-            name="edition" 
-            id="edition" 
-            onChange={(e) => setEdition(e.target.value)} 
-            className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-            required 
-          />
-        </div>
-        <div className='w-3/4'>
-          <label 
-            htmlFor="publicationDate" 
-            className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-          >
-            Publication Date
-          </label>
-          <input 
-            type="date" 
-            name="publicationDate" 
-            id="publicationDate" 
-            onChange={(e) => setPublicationDate(e.target.value)} 
-            className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-            required 
-          />
-        </div>
-          <div className="w-3/4">
-            <label 
-              htmlFor="isbn10" 
-              className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-            >
-              ISBN
-            </label>
-            <input 
-              type="text" 
-              name="isbn10" 
-              id="isbn10" 
-              onChange={(e) => setIsbn(e.target.value)} 
-              className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-              required 
-            />
-          </div>
-        <div className="w-3/4 flex space-x-4">
-          <div className="w-1/2">
-            <label 
-              htmlFor="pages" 
-              className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-            >
-              Pages
-            </label>
-            <input 
-              type="number" 
-              name="pages" 
-              id="pages" 
-              onChange={(e) => setPages(e.target.value)} 
-              className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-              required 
-            />
-          </div>
-          <div className="w-1/2">
-            <label 
-              htmlFor="price" 
-              className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-            >
-              Price
-            </label>
-            <input 
-              type="number" 
-              name="price" 
-              id="price" 
-              onChange={(e) => setPrice(e.target.value)} 
-              className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-              required 
-            />
-          </div>
-        </div>
+
+        {itemType === 'livre' ? ( 
+          <>
+            <div className='w-3/4'>
+              <label 
+                htmlFor="edition" 
+                className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+              >
+                Edition
+              </label>
+              <input 
+                type="text" 
+                name="edition" 
+                id="edition" 
+                onChange={(e) => setEdition(e.target.value)} 
+                className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                required 
+              />
+            </div>
+            <div className='w-3/4'>
+              <label 
+                htmlFor="publicationDate" 
+                className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+              >
+                Publication Date
+              </label>
+              <input 
+                type="date" 
+                name="publicationDate" 
+                id="publicationDate" 
+                onChange={(e) => setPublicationDate(e.target.value)} 
+                className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                required 
+              />
+            </div>
+              <div className="w-3/4">
+                <label 
+                  htmlFor="isbn10" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  ISBN
+                </label>
+                <input 
+                  type="text" 
+                  name="isbn10" 
+                  id="isbn10" 
+                  onChange={(e) => setIsbn(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+            <div className="w-3/4 flex space-x-4">
+              <div className="w-1/2">
+                <label 
+                  htmlFor="pages" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  Pages
+                </label>
+                <input 
+                  type="number" 
+                  name="pages" 
+                  id="pages" 
+                  onChange={(e) => setPages(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+              <div className="w-1/2">
+                <label 
+                  htmlFor="price" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  Price
+                </label>
+                <input 
+                  type="number" 
+                  name="price" 
+                  id="price" 
+                  onChange={(e) => setPrice(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className='w-3/4'>
+              <label 
+                htmlFor="publicationDate" 
+                className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+              >
+                Publication Date
+              </label>
+              <input 
+                type="date" 
+                name="publicationDate" 
+                id="publicationDate" 
+                onChange={(e) => setPublicationDate(e.target.value)} 
+                className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                required 
+              />
+            </div>
+            <div className="w-3/4 flex space-x-4">
+              <div className="w-1/2">
+                <label 
+                  htmlFor="pages" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  Duration in minutes
+                </label>
+                <input 
+                  type="number" 
+                  name="pages" 
+                  id="pages" 
+                  onChange={(e) => setDuree(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+              <div className="w-1/2">
+                <label 
+                  htmlFor="price" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  Price
+                </label>
+                <input 
+                  type="number" 
+                  name="price" 
+                  id="price" 
+                  onChange={(e) => setPrice(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+            </div>
+          </>
+        )
+        }
+
+
+        
         <button 
           type="submit" 
           className="w-1/2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
