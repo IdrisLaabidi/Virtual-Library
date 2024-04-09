@@ -50,7 +50,7 @@ const Navbar = ({ user, isLoading, error }) => {
           </div>
         </div>
         <div className="flex items-center">
-          <img className="h-8 w-8 rounded-full" src={logo} alt="Profile" />
+          <img className="h-8 w-8 rounded-full" src={user.pictureURL} alt="Profile" />
           <span className="mx-6 text-gray-800 dark:text-white text-sm font-medium">{userName}</span>
         </div>
       </div>

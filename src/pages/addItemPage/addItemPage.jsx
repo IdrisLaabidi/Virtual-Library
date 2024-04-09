@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
-
+import useFetch from '../../Hooks/useFetch';
 const CreateItemPage = () => {
   const [collection, setCollection] = useState([]);
   const [selectedCollection, setSelectedCollection] = useState('select a collection');
@@ -15,25 +15,15 @@ const CreateItemPage = () => {
   const [pages, setPages] = useState('');
   const [duree, setDuree] = useState('');
   const [price, setPrice] = useState('');
-
+  const userId = localStorage.getItem('user_id')
   const token = Cookies.get("token")
-
+  const { data: userCollectionData, isPending, error } = useFetch(`http://localhost:4000/api/collection/${userId}`);
   useEffect(() => {
-    const fetchCollection = async () => {
-      const response = await fetch('http://localhost:4000/api/collection', {
-        method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+token,
-        }
-      }
-      );
-      const data = await response.json();
-      setCollection(data.toutesLesCollections);
-    };
-    fetchCollection();
-  }, []);
-  console.log(collection)
+
+      if(!isPending&&userCollectionData)
+      setCollection(userCollectionData);
+
+  }, [isPending,userCollectionData]);
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
