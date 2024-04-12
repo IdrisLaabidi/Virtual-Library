@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 const CreateItemPage = () => {
   const [collection, setCollection] = useState([]);
-  const [selectedCollection, setSelectedCollection] = useState('select a collection');
+  const [selectedCollection, setSelectedCollection] = useState("Select a collection");
   const [itemType, setItemType] = useState('livre');
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -40,46 +40,60 @@ const CreateItemPage = () => {
     e.preventDefault();
     let item;
     if (itemType === 'livre') {
-      item = {
-        group: selectedCollection,
-        type: itemType,
-        titre: title,
-        auteur: author,
-        description,
-        editor: edition,
-        publicationDate,
-        isbn,
-        price,
-        pageNumber: pages
+      if(selectedCollection === 'Select a collection' ||
+         title === '' || author === '' || edition === '' ||
+         publicationDate === '' || isbn === '' || price === '' || pages === ''){
+            alert("Please fill out all the fields")
+           }
+      else{
+        item = {
+          group: selectedCollection,
+          type: itemType,
+          titre: title,
+          auteur: author,
+          description,
+          editor: edition,
+          publicationDate,
+          isbn,
+          price,
+          pageNumber: pages
+        }
+      }   
+      } else {
+        if(selectedCollection === 'Select a collection' ||
+           title === '' || author === '' || publicationDate === '' ||
+           price === '' || duree === ''){
+            alert("Please fill out all the fields!")
+           }
+        else{
+          item = {
+            group: selectedCollection,
+            type: itemType,
+            titre: title,
+            auteur: author,
+            description,
+            publicationDate,
+            price,
+            duree: duree
+        }
+        }
       }
-    } else {
-      item = {
-        group: selectedCollection,
-        type: itemType,
-        titre: title,
-        auteur: author,
-        description,
-        publicationDate,
-        price,
-        duree: duree
+      console.log(item)
+      try {
+        const response = await fetch('http://localhost:4000/api/item', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+token,
+          },
+          body: JSON.stringify(item),
+        });
+        const data = await response.json();
+        console.log(data);
+        navigate(0)
+      } catch (error) {
+        console.error(error);
       }
-    }
-    console.log(item)
-    try {
-      const response = await fetch('http://localhost:4000/api/item', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+token,
-        },
-        body: JSON.stringify(item),
-      });
-      const data = await response.json();
-      console.log(data);
-      navigate(0)
-    } catch (error) {
-      console.error(error);
-    }
   };
   
 
@@ -103,8 +117,9 @@ const CreateItemPage = () => {
             <select 
               className="border border-gray-300 rounded-lg px-3 py-2 w-full text-gray-900 dark:bg-gray-600 dark:text-white" 
               onChange={(e) => setSelectedCollection(e.target.value)}
+              required
             >
-              <option key="select a collection" value="Select a collection" disabled>Select a collection...</option>
+              <option key="select a collection" value="Select a collection">Select a collection...</option>
               {collection.map((collection) => (
                 <option key={collection._id} value={collection._id}>
                   {collection.title}
