@@ -18,7 +18,7 @@ const SideMenu = ({ open, toggleSideMenu }) => {
         <ul className="space-y-2">
           {itemsArray.map((item, index) => (
             <li key={index}>
-              <SideMenuItem item={item} itemLink={item.split(' ').join('')} />
+              <SideMenuItem item={item} itemLink={'/'+item.split(' ').join('')} />
             </li>
           ))}
         </ul>

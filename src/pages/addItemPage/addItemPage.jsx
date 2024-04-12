@@ -14,10 +14,11 @@ const CreateItemPage = () => {
   const [isbn, setIsbn] = useState('');
   const [pages, setPages] = useState('');
   const [duree, setDuree] = useState('');
+  const [duree, setDuree] = useState('');
   const [price, setPrice] = useState('');
-
+  const userId = localStorage.getItem('user_id')
   const token = Cookies.get("token")
-
+  const { data: userCollectionData, isPending, error } = useFetch(`http://localhost:4000/api/collection/${userId}`);
   useEffect(() => {
     const fetchCollection = async () => {
       const response = await fetch('http://localhost:4000/api/collection', {
@@ -145,6 +146,7 @@ const CreateItemPage = () => {
               value="livre" 
               className='ml-12' 
               defaultChecked
+              defaultChecked
               onChange={(e) => setItemType(e.target.value)} 
             /> 
             <span className='dark:text-white'>Book</span>
@@ -205,6 +207,150 @@ const CreateItemPage = () => {
             required
           ></textarea>
         </div>
+
+        {itemType === 'livre' ? ( 
+          <>
+            <div className='w-3/4'>
+              <label 
+                htmlFor="edition" 
+                className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+              >
+                Edition
+              </label>
+              <input 
+                type="text" 
+                name="edition" 
+                id="edition" 
+                onChange={(e) => setEdition(e.target.value)} 
+                className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                required 
+              />
+            </div>
+            <div className='w-3/4'>
+              <label 
+                htmlFor="publicationDate" 
+                className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+              >
+                Publication Date
+              </label>
+              <input 
+                type="date" 
+                name="publicationDate" 
+                id="publicationDate" 
+                onChange={(e) => setPublicationDate(e.target.value)} 
+                className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                required 
+              />
+            </div>
+              <div className="w-3/4">
+                <label 
+                  htmlFor="isbn10" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  ISBN
+                </label>
+                <input 
+                  type="text" 
+                  name="isbn10" 
+                  id="isbn10" 
+                  onChange={(e) => setIsbn(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+            <div className="w-3/4 flex space-x-4">
+              <div className="w-1/2">
+                <label 
+                  htmlFor="pages" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  Pages
+                </label>
+                <input 
+                  type="number" 
+                  name="pages" 
+                  id="pages" 
+                  onChange={(e) => setPages(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+              <div className="w-1/2">
+                <label 
+                  htmlFor="price" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  Price
+                </label>
+                <input 
+                  type="number" 
+                  name="price" 
+                  id="price" 
+                  onChange={(e) => setPrice(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className='w-3/4'>
+              <label 
+                htmlFor="publicationDate" 
+                className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+              >
+                Publication Date
+              </label>
+              <input 
+                type="date" 
+                name="publicationDate" 
+                id="publicationDate" 
+                onChange={(e) => setPublicationDate(e.target.value)} 
+                className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                required 
+              />
+            </div>
+            <div className="w-3/4 flex space-x-4">
+              <div className="w-1/2">
+                <label 
+                  htmlFor="pages" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  Duration in minutes
+                </label>
+                <input 
+                  type="number" 
+                  name="pages" 
+                  id="pages" 
+                  onChange={(e) => setDuree(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+              <div className="w-1/2">
+                <label 
+                  htmlFor="price" 
+                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
+                >
+                  Price
+                </label>
+                <input 
+                  type="number" 
+                  name="price" 
+                  id="price" 
+                  onChange={(e) => setPrice(e.target.value)} 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                  required 
+                />
+              </div>
+            </div>
+          </>
+        )
+        }
+
+
+        
 
         {itemType === 'livre' ? ( 
           <>
