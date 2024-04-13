@@ -42,62 +42,49 @@ const CreateItemPage = () => {
     e.preventDefault();
     let item;
     if (itemType === 'livre') {
-      if(selectedCollection === 'Select a collection' ||
-         title === '' || author === '' || edition === '' ||
-         publicationDate === '' || isbn === '' || price === '' || pages === ''){
-            alert("Please fill out all the fields")
-           }
-      else{
-        item = {
-          group: selectedCollection,
-          type: itemType,
-          titre: title,
-          auteur: author,
-          description,
-          editor: edition,
-          publicationDate,
-          isbn,
-          price,
-          pageNumber: pages
-        }
-      }   
-      } else {
-        if(selectedCollection === 'Select a collection' ||
-           title === '' || author === '' || publicationDate === '' ||
-           price === '' || duree === ''){
-            alert("Please fill out all the fields!")
-           }
-        else{
-          item = {
-            group: selectedCollection,
-            type: itemType,
-            titre: title,
-            auteur: author,
-            description,
-            publicationDate,
-            price,
-            duree: duree
-        }
-        }
+      item = {
+        group: selectedCollection,
+        type: itemType,
+        titre: title,
+        auteur: author,
+        description,
+        editor: edition,
+        publicationDate,
+        isbn,
+        price,
+        pageNumber: pages,
+        itemPicture : itemPicture
       }
-      console.log(item)
-      try {
-        const response = await fetch('http://localhost:4000/api/item', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+token,
-          },
-          body: JSON.stringify(item),
-        });
-        const data = await response.json();
-        console.log(data);
-        navigate(0)
-      } catch (error) {
-        console.error(error);
+    } else {
+      item = {
+        group: selectedCollection,
+        type: itemType,
+        titre: title,
+        auteur: author,
+        description,
+        publicationDate,
+        price,
+        duree: duree,
+        itemPicture : itemPicture
       }
+    }
+    console.log(item)
+    try {
+      const response = await fetch('http://localhost:4000/api/item', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+token,
+        },
+        body: JSON.stringify(item),
+      });
+      const data = await response.json();
+      console.log(data.message);
+      
+    } catch (error) {
+      console.error(error);
+    }
   };
-  
   const handleItemPictureChange = (e) => {
     const file = e.target.files[0];
     console.log(file.size)
@@ -118,7 +105,6 @@ const CreateItemPage = () => {
         reader.readAsDataURL(file);
     }
 };
-
 
   return (
     <div 
@@ -149,8 +135,9 @@ const CreateItemPage = () => {
                 </option>
               ))}
             </select>
-          </label>
-          <div className='relative w-[170px] h-[170px] overflow-hidden mb-[1rem] rounded-sm'>
+          </label>          
+        </div>
+        <div className='relative w-[170px] h-[170px] overflow-hidden mb-[1rem] rounded-sm'>
                 {/* Display profile picture mosta9bel */}
                 
                 {(itemPicture) ? (
@@ -166,8 +153,7 @@ const CreateItemPage = () => {
                     className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer'
                   
                 />
-            </div>          
-        </div>
+            </div>
         <div>
           <div className='mb-4 dark:text-white'>Item Type:</div>
           <label>
