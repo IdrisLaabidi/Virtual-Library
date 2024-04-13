@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import useFetch from '../../Hooks/useFetch';
+
 const CreateItemPage = () => {
   const [collection, setCollection] = useState([]);
-  const [selectedCollection, setSelectedCollection] = useState('select a collection');
+  const [selectedCollection, setSelectedCollection] = useState("Select a collection");
   const [itemType, setItemType] = useState('livre');
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -15,45 +16,71 @@ const CreateItemPage = () => {
   const [pages, setPages] = useState('');
   const [duree, setDuree] = useState('');
   const [price, setPrice] = useState('');
+  const [itemPicture , setItemPicture] = useState("")
+  const types = ['image/png', 'image/jpeg']; // image types
   const userId = localStorage.getItem('user_id')
   const token = Cookies.get("token")
-  const { data: userCollectionData, isPending, error } = useFetch(`http://localhost:4000/api/collection/${userId}`);
+
   useEffect(() => {
-
-      if(!isPending&&userCollectionData)
-      setCollection(userCollectionData);
-
-  }, [isPending,userCollectionData]);
+    const fetchCollection = async () => {
+      const response = await fetch('http://localhost:4000/api/collection', {
+        method: 'GET',
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+token,
+        }
+      }
+      );
+      const data = await response.json();
+      setCollection(data.toutesLesCollections);
+    };
+    fetchCollection();
+  }, []);
+  console.log(collection)
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     let item;
     if (itemType === 'livre') {
-      item = {
-        collection: selectedCollection,
-        type: itemType,
-        titre: title,
-        auteur: author,
-        description,
-        editor: edition,
-        publicationDate,
-        isbn,
-        price,
-        pageNumber: pages
+      if(selectedCollection === 'Select a collection' ||
+         title === '' || author === '' || edition === '' ||
+         publicationDate === '' || isbn === '' || price === '' || pages === ''){
+            alert("Please fill out all the fields")
+           }
+      else{
+        item = {
+          group: selectedCollection,
+          type: itemType,
+          titre: title,
+          auteur: author,
+          description,
+          editor: edition,
+          publicationDate,
+          isbn,
+          price,
+          pageNumber: pages
+        }
+      }   
+      } else {
+        if(selectedCollection === 'Select a collection' ||
+           title === '' || author === '' || publicationDate === '' ||
+           price === '' || duree === ''){
+            alert("Please fill out all the fields!")
+           }
+        else{
+          item = {
+            group: selectedCollection,
+            type: itemType,
+            titre: title,
+            auteur: author,
+            description,
+            publicationDate,
+            price,
+            duree: duree
+        }
+        }
       }
-    } else {
-      item = {
-        collection: selectedCollection,
-        type: itemType,
-        titre: title,
-        auteur: author,
-        description,
-        publicationDate,
-        price,
-        duree: duree
-      }
-    }
     console.log(item)
     try {
       const response = await fetch('http://localhost:4000/api/item', {
@@ -65,13 +92,32 @@ const CreateItemPage = () => {
         body: JSON.stringify(item),
       });
       const data = await response.json();
-      console.log(data);
-      navigate(0)
+      console.log(data.message);
+      
     } catch (error) {
       console.error(error);
     }
   };
-  
+  const handleItemPictureChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file.size)
+    if (!(file && types.includes(file.type))){
+      alert('Please select a valid image type (jgp or png)')
+    }
+    const reader = new FileReader();
+    const maxFileSize = 5 * 1024 * 1024; // 5MB as maximum size of the item image
+    if (file.size > maxFileSize) {
+        alert('Picture size should not exceed 5MB');
+        return;
+    }
+    reader.onloadend = () => {
+        console.log('item Picture Read:', reader.result);
+        setItemPicture(reader.result);
+    };
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+};
 
   return (
     <div 
@@ -93,8 +139,9 @@ const CreateItemPage = () => {
             <select 
               className="border border-gray-300 rounded-lg px-3 py-2 w-full text-gray-900 dark:bg-gray-600 dark:text-white" 
               onChange={(e) => setSelectedCollection(e.target.value)}
+              required
             >
-              <option key="select a collection" value="Select a collection" disabled>Select a collection...</option>
+              <option key="select a collection" value="Select a collection">Select a collection...</option>
               {collection.map((collection) => (
                 <option key={collection._id} value={collection._id}>
                   {collection.title}
@@ -103,6 +150,23 @@ const CreateItemPage = () => {
             </select>
           </label>          
         </div>
+        <div className='relative w-[170px] h-[170px] overflow-hidden mb-[1rem] rounded-sm'>
+                {/* Display profile picture mosta9bel */}
+                
+                {(itemPicture) ? (
+                    <img src={itemPicture} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                    <div className="flex justify-center items-center w-full h-full bg-[#ddd] text-gray-500 text-[1rem] font-bold ">Default Pic</div>
+                )}
+                {/* Input field to upload profile picture */}
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleItemPictureChange}
+                    className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer'
+                  
+                />
+            </div>
         <div>
           <div className='mb-4 dark:text-white'>Item Type:</div>
           <label>
@@ -154,7 +218,7 @@ const CreateItemPage = () => {
             htmlFor="author" 
             className="flex justify-start mb-2 text-sm font-medium dark:text-white"
           >
-            Author
+            {itemType === 'livre' ? 'Author' : (itemType === 'musique' ? 'Artist' : 'Director')}
           </label>
           <input 
             type="text" 
