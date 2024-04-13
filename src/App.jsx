@@ -9,6 +9,7 @@ import Home from './pages/HomePage/Home';
 import MyLibraryPage from './pages/MyLibrary/myLibraryPage';
 import ViewCollection from './components/viewCollection/viewCollection';
 import LandingPage from './pages/landingPage/landingPage'
+import NewCollection from './pages/addCollection/addCollection';
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" element={<Register/>} />
           <Route path="/home" element={<Layout children={<Home/>} path="/home" />}/>
           <Route path='/newItem' element={<Layout children={<AddItem/>}/>}/>
+          <Route path='/MyLibrary/AddNewCollection' element={<Layout children={<NewCollection/>}/>}/>
           <Route path="/myaccount" element={<Layout children={<MyAccountPage/>}/>}/>
           <Route path="/MyLibrary" element={<Layout children={<MyLibraryPage/>}/>}/>
           <Route path="MyLibrary/viewCollection/:collectionId" element={<Layout children={<ViewCollection/>}/>}/>
