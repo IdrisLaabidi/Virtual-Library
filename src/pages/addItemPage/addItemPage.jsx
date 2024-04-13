@@ -15,6 +15,8 @@ const CreateItemPage = () => {
   const [pages, setPages] = useState('');
   const [duree, setDuree] = useState('');
   const [price, setPrice] = useState('');
+  const [itemPicture , setItemPicture] = useState("")
+  const types = ['image/png', 'image/jpeg']; // image types
   const userId = localStorage.getItem('user_id')
   const token = Cookies.get("token")
   const { data: userCollectionData, isPending, error } = useFetch(`http://localhost:4000/api/collection/${userId}`);
@@ -31,7 +33,7 @@ const CreateItemPage = () => {
     let item;
     if (itemType === 'livre') {
       item = {
-        collection: selectedCollection,
+        group: selectedCollection,
         type: itemType,
         titre: title,
         auteur: author,
@@ -40,18 +42,20 @@ const CreateItemPage = () => {
         publicationDate,
         isbn,
         price,
-        pageNumber: pages
+        pageNumber: pages,
+        itemPicture : itemPicture
       }
     } else {
       item = {
-        collection: selectedCollection,
+        group: selectedCollection,
         type: itemType,
         titre: title,
         auteur: author,
         description,
         publicationDate,
         price,
-        duree: duree
+        duree: duree,
+        itemPicture : itemPicture
       }
     }
     console.log(item)
@@ -65,13 +69,32 @@ const CreateItemPage = () => {
         body: JSON.stringify(item),
       });
       const data = await response.json();
-      console.log(data);
+      console.log(data.message);
       
     } catch (error) {
       console.error(error);
     }
   };
-  
+  const handleItemPictureChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file.size)
+    if (!(file && types.includes(file.type))){
+      alert('Please select a valid image type (jgp or png)')
+    }
+    const reader = new FileReader();
+    const maxFileSize = 5 * 1024 * 1024; // 5MB as maximum size of the item image
+    if (file.size > maxFileSize) {
+        alert('Picture size should not exceed 5MB');
+        return;
+    }
+    reader.onloadend = () => {
+        console.log('item Picture Read:', reader.result);
+        setItemPicture(reader.result);
+    };
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+};
 
   return (
     <div 
@@ -103,6 +126,23 @@ const CreateItemPage = () => {
             </select>
           </label>          
         </div>
+        <div className='relative w-[170px] h-[170px] overflow-hidden mb-[1rem] rounded-sm'>
+                {/* Display profile picture mosta9bel */}
+                
+                {(itemPicture) ? (
+                    <img src={itemPicture} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                    <div className="flex justify-center items-center w-full h-full bg-[#ddd] text-gray-500 text-[1rem] font-bold ">Default Pic</div>
+                )}
+                {/* Input field to upload profile picture */}
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleItemPictureChange}
+                    className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer'
+                  
+                />
+            </div>
         <div>
           <div className='mb-4 dark:text-white'>Item Type:</div>
           <label>
