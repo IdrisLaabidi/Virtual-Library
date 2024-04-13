@@ -14,11 +14,12 @@ const CreateItemPage = () => {
   const [isbn, setIsbn] = useState('');
   const [pages, setPages] = useState('');
   const [duree, setDuree] = useState('');
-  const [duree, setDuree] = useState('');
   const [price, setPrice] = useState('');
+  const [itemPicture , setItemPicture] = useState("")
+  const types = ['image/png', 'image/jpeg']; // image types
   const userId = localStorage.getItem('user_id')
   const token = Cookies.get("token")
-  const { data: userCollectionData, isPending, error } = useFetch(`http://localhost:4000/api/collection/${userId}`);
+
   useEffect(() => {
     const fetchCollection = async () => {
       const response = await fetch('http://localhost:4000/api/collection', {
@@ -97,6 +98,27 @@ const CreateItemPage = () => {
       }
   };
   
+  const handleItemPictureChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file.size)
+    if (!(file && types.includes(file.type))){
+      alert('Please select a valid image type (jgp or png)')
+    }
+    const reader = new FileReader();
+    const maxFileSize = 5 * 1024 * 1024; // 5MB as maximum size of the item image
+    if (file.size > maxFileSize) {
+        alert('Picture size should not exceed 5MB');
+        return;
+    }
+    reader.onloadend = () => {
+        console.log('item Picture Read:', reader.result);
+        setItemPicture(reader.result);
+    };
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+};
+
 
   return (
     <div 
@@ -127,7 +149,24 @@ const CreateItemPage = () => {
                 </option>
               ))}
             </select>
-          </label>          
+          </label>
+          <div className='relative w-[170px] h-[170px] overflow-hidden mb-[1rem] rounded-sm'>
+                {/* Display profile picture mosta9bel */}
+                
+                {(itemPicture) ? (
+                    <img src={itemPicture} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                    <div className="flex justify-center items-center w-full h-full bg-[#ddd] text-gray-500 text-[1rem] font-bold ">Default Pic</div>
+                )}
+                {/* Input field to upload profile picture */}
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleItemPictureChange}
+                    className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer'
+                  
+                />
+            </div>          
         </div>
         <div>
           <div className='mb-4 dark:text-white'>Item Type:</div>
@@ -145,7 +184,6 @@ const CreateItemPage = () => {
               name="inputType" 
               value="livre" 
               className='ml-12' 
-              defaultChecked
               defaultChecked
               onChange={(e) => setItemType(e.target.value)} 
             /> 
@@ -207,150 +245,6 @@ const CreateItemPage = () => {
             required
           ></textarea>
         </div>
-
-        {itemType === 'livre' ? ( 
-          <>
-            <div className='w-3/4'>
-              <label 
-                htmlFor="edition" 
-                className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-              >
-                Edition
-              </label>
-              <input 
-                type="text" 
-                name="edition" 
-                id="edition" 
-                onChange={(e) => setEdition(e.target.value)} 
-                className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                required 
-              />
-            </div>
-            <div className='w-3/4'>
-              <label 
-                htmlFor="publicationDate" 
-                className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-              >
-                Publication Date
-              </label>
-              <input 
-                type="date" 
-                name="publicationDate" 
-                id="publicationDate" 
-                onChange={(e) => setPublicationDate(e.target.value)} 
-                className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                required 
-              />
-            </div>
-              <div className="w-3/4">
-                <label 
-                  htmlFor="isbn10" 
-                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-                >
-                  ISBN
-                </label>
-                <input 
-                  type="text" 
-                  name="isbn10" 
-                  id="isbn10" 
-                  onChange={(e) => setIsbn(e.target.value)} 
-                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                  required 
-                />
-              </div>
-            <div className="w-3/4 flex space-x-4">
-              <div className="w-1/2">
-                <label 
-                  htmlFor="pages" 
-                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-                >
-                  Pages
-                </label>
-                <input 
-                  type="number" 
-                  name="pages" 
-                  id="pages" 
-                  onChange={(e) => setPages(e.target.value)} 
-                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                  required 
-                />
-              </div>
-              <div className="w-1/2">
-                <label 
-                  htmlFor="price" 
-                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-                >
-                  Price
-                </label>
-                <input 
-                  type="number" 
-                  name="price" 
-                  id="price" 
-                  onChange={(e) => setPrice(e.target.value)} 
-                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                  required 
-                />
-              </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className='w-3/4'>
-              <label 
-                htmlFor="publicationDate" 
-                className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-              >
-                Publication Date
-              </label>
-              <input 
-                type="date" 
-                name="publicationDate" 
-                id="publicationDate" 
-                onChange={(e) => setPublicationDate(e.target.value)} 
-                className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                required 
-              />
-            </div>
-            <div className="w-3/4 flex space-x-4">
-              <div className="w-1/2">
-                <label 
-                  htmlFor="pages" 
-                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-                >
-                  Duration in minutes
-                </label>
-                <input 
-                  type="number" 
-                  name="pages" 
-                  id="pages" 
-                  onChange={(e) => setDuree(e.target.value)} 
-                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                  required 
-                />
-              </div>
-              <div className="w-1/2">
-                <label 
-                  htmlFor="price" 
-                  className="flex justify-start mb-2 text-sm font-medium dark:text-white"
-                >
-                  Price
-                </label>
-                <input 
-                  type="number" 
-                  name="price" 
-                  id="price" 
-                  onChange={(e) => setPrice(e.target.value)} 
-                  className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                  required 
-                />
-              </div>
-            </div>
-          </>
-        )
-        }
-
-
-        
 
         {itemType === 'livre' ? ( 
           <>

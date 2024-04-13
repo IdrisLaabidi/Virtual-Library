@@ -3,7 +3,7 @@ import SideMenuItem from '../sideMenuItem/sideMenuItem';
 import logo from '../../assets/logo.jpeg'
 
 const SideMenu = ({ open, toggleSideMenu }) => {
-  const itemsArray = ['Home', 'My Account', 'My Library', 'Add Item', 'Feedback', 'Settings'];
+  const itemsArray = ['Home', 'My Account', 'My Library', 'Feedback', 'Settings'];
 
   // Add classes to control the visibility of the side menu
   const sideMenuClasses = open ? 'block' : 'hidden';
