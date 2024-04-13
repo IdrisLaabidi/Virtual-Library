@@ -42,32 +42,44 @@ const CreateItemPage = () => {
     e.preventDefault();
     let item;
     if (itemType === 'livre') {
-      item = {
-        group: selectedCollection,
-        type: itemType,
-        titre: title,
-        auteur: author,
-        description,
-        editor: edition,
-        publicationDate,
-        isbn,
-        price,
-        pageNumber: pages,
-        itemPicture : itemPicture
+      if(selectedCollection === 'Select a collection' ||
+         title === '' || author === '' || edition === '' ||
+         publicationDate === '' || isbn === '' || price === '' || pages === ''){
+            alert("Please fill out all the fields")
+           }
+      else{
+        item = {
+          group: selectedCollection,
+          type: itemType,
+          titre: title,
+          auteur: author,
+          description,
+          editor: edition,
+          publicationDate,
+          isbn,
+          price,
+          pageNumber: pages
+        }
+      }   
+      } else {
+        if(selectedCollection === 'Select a collection' ||
+           title === '' || author === '' || publicationDate === '' ||
+           price === '' || duree === ''){
+            alert("Please fill out all the fields!")
+           }
+        else{
+          item = {
+            group: selectedCollection,
+            type: itemType,
+            titre: title,
+            auteur: author,
+            description,
+            publicationDate,
+            price,
+            duree: duree
+        }
+        }
       }
-    } else {
-      item = {
-        group: selectedCollection,
-        type: itemType,
-        titre: title,
-        auteur: author,
-        description,
-        publicationDate,
-        price,
-        duree: duree,
-        itemPicture : itemPicture
-      }
-    }
     console.log(item)
     try {
       const response = await fetch('http://localhost:4000/api/item', {
