@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
-import useFetch from '../../Hooks/useFetch';
+import useFetch from '../../Hooks/useFetch'
 
 const CreateItemPage = () => {
   const [collection, setCollection] = useState([]);
@@ -21,21 +21,13 @@ const CreateItemPage = () => {
   const userId = localStorage.getItem('user_id')
   const token = Cookies.get("token")
 
+  const { data: userCollectionData, isPending, error } = useFetch(`http://localhost:4000/api/collection/${userId}`);
   useEffect(() => {
-    const fetchCollection = async () => {
-      const response = await fetch('http://localhost:4000/api/collection', {
-        method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+token,
-        }
-      }
-      );
-      const data = await response.json();
-      setCollection(data.toutesLesCollections);
-    };
-    fetchCollection();
-  }, []);
+
+      if(!isPending&&userCollectionData)
+      setCollection(userCollectionData);
+
+  }, [isPending,userCollectionData]);
   console.log(collection)
 
   const navigate = useNavigate();
@@ -59,7 +51,8 @@ const CreateItemPage = () => {
           publicationDate,
           isbn,
           price,
-          pageNumber: pages
+          pageNumber: pages,
+          itemPicture : itemPicture,
         }
       }   
       } else {
@@ -77,7 +70,8 @@ const CreateItemPage = () => {
             description,
             publicationDate,
             price,
-            duree: duree
+            duree: duree,
+            itemPicture : itemPicture,
         }
         }
       }
