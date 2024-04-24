@@ -11,6 +11,7 @@ import ViewCollection from './components/viewCollection/viewCollection';
 import LandingPage from './pages/landingPage/landingPage'
 import NewCollection from './pages/addCollection/addCollection';
 import UpdateItemPage from './pages/updateItemPage/updateItemPage';
+import ViewItem from './pages/viewItem/ItemPage';
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
           <Route path="/MyLibrary" element={<Layout children={<MyLibraryPage/>}/>}/>
           <Route path="MyLibrary/viewCollection/:collectionId" element={<Layout children={<ViewCollection/>}/>}/>
           <Route path="MyLibrary/updateItem/:itemId" element={<Layout children={<UpdateItemPage/>}/>}/>
+          <Route path="MyLibrary/viewItem/:itemId" element={<Layout children={<ViewItem/>}/>}/>
           <Route path="*" element={<div>error</div>} />
         </Routes>
       </BrowserRouter>
