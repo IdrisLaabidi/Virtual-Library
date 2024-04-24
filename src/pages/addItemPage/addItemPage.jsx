@@ -85,11 +85,19 @@ const CreateItemPage = () => {
         },
         body: JSON.stringify(item),
       });
+      if (response.ok){
+        alert('item created')
+        navigate('/MyLibrary')
+      }
+      if(!response.ok){
+        alert("an error occured")
+      }
       const data = await response.json();
       console.log(data.message);
       
     } catch (error) {
       console.error(error);
+      alert('error creating item')
     }
   };
   const handleItemPictureChange = (e) => {
@@ -115,7 +123,7 @@ const CreateItemPage = () => {
 
   return (
     <div 
-      className="p-6 space-y-4 md:space-y-6 sm:p-8"
+      className="p-6 space-y-4 md:space-y-6 sm:p-8 md:max-h-screen "
     >
       <h1 
         className="dark:text-white text-xl font-bold leading-tight tracking-tight"
@@ -123,7 +131,7 @@ const CreateItemPage = () => {
         Create your item
       </h1>
       <form 
-        className="space-y-4 md:space-y-6" 
+        className="space-y-4 md:space-y-6 md:max-h-screen pb-5" 
       >
         <div className='w-3/4'>
           <div className='mb-4 dark:text-white'>Collection:</div>

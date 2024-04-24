@@ -9,6 +9,7 @@ const ViewCollection = () => {
     const [itemsInCollection , setItemsInCollection] = useState([]);
     const {collectionId} = useParams();
     const {data : collectionItems , isPending , error} = useFetch(`http://localhost:4000/api/item/collection/${collectionId}`);
+
     if(!isPending)console.log(collectionItems)
     useEffect(()=>{
         if(!isPending && collectionItems ){
@@ -27,7 +28,7 @@ const ViewCollection = () => {
             <div className='flex items-center justify-center'>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4'>
                     {itemsInCollection.map((item) => (
-                        <ItemCard item={item}></ItemCard>
+                        <ItemCard item={item}  ></ItemCard>
                     ))}
                 </div>
             </div>

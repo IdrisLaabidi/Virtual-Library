@@ -3,10 +3,11 @@ import useFetch from '../../Hooks/useFetch';
 import {MoonLoader} from 'react-spinners'
 import {useNavigate} from 'react-router-dom'
 import Cookies from 'js-cookie'
-const token = Cookies.get("token")
+
 
 const UserBookshelf = () => {
     const userId = localStorage.getItem('user_id');
+    const token = Cookies.get("token")
     const [userCollection, setUserCollection] = useState([]);
     const { data: userCollectionData, isPending, error } = useFetch(`http://localhost:4000/api/collection/${userId}`);
     const navigate = useNavigate()
@@ -42,7 +43,7 @@ const UserBookshelf = () => {
             <div className="container mx-auto">
                 <h1 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">My Library</h1>
                 {isPending && 
-                    <div class="flex items-center justify-center">
+                    <div className="flex items-center justify-center">
                         <MoonLoader color='rgb(165 180 252)'/>
                     </div>
                 }
@@ -62,14 +63,14 @@ const UserBookshelf = () => {
                                         onClick={()=>{navigate(`/MyLibrary/viewCollection/${collection._id}`)}}
                                         >
                                             
-                                        View Collection
+                                        View
                                     </button>
                                     <button 
                                         className="text-red-700 hover:text-red-500 font-semibold"
                                         onClick={()=>{handleDelete({collection})}}
                                         >
                                             
-                                        Delete Collection
+                                        Delete
                                     </button>
                                 </div>
                             </div>
