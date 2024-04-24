@@ -43,13 +43,13 @@ const MyAccountPage = () => {
       alert('Please select a valid image type (jgp or png)')
     }
     const reader = new FileReader();
-    const maxFileSize = 5 * 1024 * 1024; // 5MB
+    const maxFileSize = 50 * 1024 * 1024 ; // 5MB
     if (file.size > maxFileSize) {
-        alert('Picture size should not exceed 5MB');
+        alert('Picture size should not exceed 50MB');
         return;
     }
     reader.onloadend = () => {
-        console.log('Profile Picture Read:', reader.result);
+        //console.log('Profile Picture Read:', reader.result);
         setProfilePicture(reader.result);
     };
     if (file) {

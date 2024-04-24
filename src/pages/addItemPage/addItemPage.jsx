@@ -99,7 +99,7 @@ const CreateItemPage = () => {
       alert('Please select a valid image type (jgp or png)')
     }
     const reader = new FileReader();
-    const maxFileSize = 5 * 1024 * 1024; // 5MB as maximum size of the item image
+    const maxFileSize = 50 * 1024 * 1024 ; // 5MB as maximum size of the item image
     if (file.size > maxFileSize) {
         alert('Picture size should not exceed 5MB');
         return;
