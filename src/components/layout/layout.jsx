@@ -12,16 +12,16 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="flex dark:bg-[#141a28]">
+    <div className="flex dark:bg-[#141a28] ">
       {/* Pass the open state to the SideMenu component */}
       <SideMenu open={open}/>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full md:max-h-screen ">
         <NavBar user={user}/>
-        <main className="px-4 py-6 flex-grow">{children}</main>
+        <main className="px-4 py-6 flex-grow overflow-y-scroll overflow-x-hidden">{children}</main>
       </div>
       {/* Add a button to toggle the SideMenu */}
       <button
-        className="fixed top-0 left-0 z-50 p-4 text-white"
+        className="fixed top-0 left-0 z-50 p-4 dark:text-white "
         onClick={toggleSideMenu}
         aria-label="Toggle Side Menu"
       >

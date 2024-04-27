@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 
 const NewCollection = () => {
@@ -8,6 +9,7 @@ const NewCollection = () => {
     const [lang,setLang] = useState("Select a language")
     const userId = localStorage.getItem("user_id")
     const token = Cookies.get("token")
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -31,6 +33,7 @@ const NewCollection = () => {
                 });
                 if (response.ok){
                     alert('collection created')
+                    navigate('/MyLibrary')
                 }
                 
               } catch (error) {

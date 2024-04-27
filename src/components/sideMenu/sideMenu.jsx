@@ -9,10 +9,10 @@ const SideMenu = ({ open, toggleSideMenu }) => {
   const sideMenuClasses = open ? 'block' : 'hidden';
 
   return (
-    <aside className={`w-64 ${sideMenuClasses} transition-all ease-in-out duration-300`}>
-      <div className="h-screen overflow-y-auto py-4 px-3 bg-white dark:bg-[#1b2536] rounded shadow dark:text-white">
-        <div className="flex items-center justify-between px-1 mt-5 mb-10">
-          <img className="hidden h-16 lg:block" alt="Logo" src={logo}/>
+    <aside className={`w-64 ${sideMenuClasses} transition-all ease-in-out duration-300 `}>
+      <div className="h-screen overflow-y-auto py-4 px-3 bg-white dark:bg-[#1b2536] rounded shadow dark:text-white md:max-h-screen">
+        <div className="flex items-center justify-between px-3 mt-8 mb-10 gap-1">
+          <img className="hidden h-16 lg:block rounded-xl " alt="Logo" src={logo}/>
           <span className="text-2xl font-semibold">Virtual Library</span>
         </div>
         <ul className="space-y-2">
