@@ -89,12 +89,14 @@ const NewCollection = () => {
               <option key="ru" value="ru">Russian</option>
               <option key="de" value="de">German</option>  
         </select>
+        <div class="flex items-center justify-center">
         <button 
           onClick={handleSubmit}
-          className="w-1/2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          className="w-48 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
         >
           Create Collection
         </button>
+        </div>
       </form>
     </div>
      );

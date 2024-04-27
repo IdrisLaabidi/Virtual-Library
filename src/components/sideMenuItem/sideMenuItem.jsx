@@ -12,12 +12,12 @@ const SideMenuItem = (props) => {
   };
 
   return (
-    <div 
+    <><div
       className="relative"
       onMouseEnter={() => setIsDropdownVisible(true)}
       onMouseLeave={() => setIsDropdownVisible(false)}
     >
-      <button 
+      <button
         className="flex items-center justify-between w-full p-2 text-base font-normal rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
         onClick={() => handleItemClick(props.itemLink)}
       >
@@ -34,8 +34,7 @@ const SideMenuItem = (props) => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M5 15l7-7 7 7"
-            />
+              d="M5 15l7-7 7 7" />
           </svg>
         )}
       </button>
@@ -56,6 +55,21 @@ const SideMenuItem = (props) => {
         </div>
       )}
     </div>
+    <div>
+    {props.item === 'Feedback' && (
+        <div className="absolute left-0 top-full mt-1 w-full bg-white dark:bg-gray-800 shadow-md rounded-lg z-10">
+          <a
+            className="block px-4 py-2 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
+            onClick={() => handleItemClick('/feedback')}
+          >
+           
+          </a>
+          
+        </div>
+      )}
+    </div></>
+
+    
   );
 };
 
