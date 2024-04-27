@@ -3,11 +3,13 @@ import useFetch from '../../Hooks/useFetch';
 import {MoonLoader} from 'react-spinners'
 import {useNavigate} from 'react-router-dom'
 import Cookies from 'js-cookie'
+import Modal from '../modal/modal';
 
 
 const UserBookshelf = () => {
     const userId = localStorage.getItem('user_id');
     const token = Cookies.get("token")
+    const [isOpen, setIsOpen]=useState(false)
     const [userCollection, setUserCollection] = useState([]);
     const { data: userCollectionData, isPending, error } = useFetch(`http://localhost:4000/api/collection/${userId}`);
     const navigate = useNavigate()
@@ -72,6 +74,16 @@ const UserBookshelf = () => {
                                             
                                         Delete
                                     </button>
+                                    <button 
+                                        className="text-red-700 hover:text-red-500 font-semibold"
+                                        onClick={()=>{setIsOpen(true)}}
+                                        >
+                                            
+                                        Share
+                                    </button>
+                                    <Modal open={isOpen} onClose={()=>setIsOpen(false)} title="Share this collection to a friend">
+                                        hala wlh this a test for the modal
+                                    </Modal>
                                 </div>
                             </div>
                         ))}
