@@ -8,7 +8,7 @@ const UpdateItemPage = () => {
 
   const {itemId} = useParams()
   const {data: item, isPending1, error1} = useFetch(`http://localhost:4000/api/item/${itemId}`)
-  console.log(item)
+
   //const {actualItemGroup, isPending2, error2} = useFetch(`http://localhost:4000/api/collection/${item.group}`)
 
   
@@ -34,7 +34,7 @@ const UpdateItemPage = () => {
         setAuthor(item.auteur);
         setDescription(item.description);
         setEdition(item.editor);
-        setPublicationDate(item.publicationDate);
+        setPublicationDate(format(new Date(item.publicationDate),'dd-MM-yyyy'));
         setIsbn(item.isbn);
         setPages(item.pageNumber);
         setDuree(item.duree);
@@ -292,7 +292,7 @@ const UpdateItemPage = () => {
                 value={publicationDate}
                 onChange={(e) => setPublicationDate(e.target.value)} 
                 className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
-                required 
+               
               />
             </div>
               <div className="w-3/4">
