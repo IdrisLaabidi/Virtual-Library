@@ -13,6 +13,7 @@ import NewCollection from './pages/addCollection/addCollection';
 import UpdateItemPage from './pages/updateItemPage/updateItemPage';
 import ViewItem from './pages/viewItem/ItemPage';
 import FeedbackPage from './pages/feedbackPage/feedbackPage';
+import ErrorPage from './pages/errorPage/errorPage';
 function App() {
   return (
     <>
@@ -30,7 +31,7 @@ function App() {
           <Route path="MyLibrary/updateItem/:itemId" element={<Layout children={<UpdateItemPage/>}/>}/>
           <Route path="MyLibrary/viewItem/:itemId" element={<Layout children={<ViewItem/>}/>}/>
           <Route path="/feedback" element={<Layout children={<FeedbackPage/>}/>}/>
-          <Route path="*" element={<div>error</div>} />
+          <Route path="*" element={<ErrorPage/>} />
         </Routes>
       </BrowserRouter>
     </> 
