@@ -13,8 +13,8 @@ const NewCollection = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if(lang === "Select a language"){
-            alert("please select a language")
+        if(lang === "Select a language" || title === ""){
+            alert("please enter a valid title and/or select a language")
         }else{
             const collection = {
                 user : userId,
@@ -66,7 +66,7 @@ const NewCollection = () => {
             id="title" 
             value={title}
             onChange={ e => setTitle(e.target.value)}
-            placeholder="enter a title for our collection" 
+            placeholder="enter a title for your collection" 
             className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
             required 
         ></input>

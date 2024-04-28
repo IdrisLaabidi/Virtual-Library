@@ -26,12 +26,14 @@ const SideMenu = ({ open, toggleSideMenu }) => {
             </li>
           ))}
         </ul>
-        <div className=''>
-          <button onClick={() => {
-            localStorage.removeItem('user_id');
-            Cookies.remove('token');
-            navigate('/');
-          }}>logout</button>
+        <div className=' mt-12 w-full h-10 flex items-center justify-center'>
+          <button 
+            className=' bg-blue-500 hover:bg-blue-700 rounded cursor-pointer w-4/5 h-full'
+            onClick={() => {
+              localStorage.removeItem('user_id');
+              Cookies.expire('token')
+              navigate('/');
+            }}>logout</button>
         </div>
       </div>
     </aside>

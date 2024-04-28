@@ -4,12 +4,14 @@ import Lottie from 'react-lottie';
 import Cookies from 'js-cookie';
 
 import feedbackAnimation from '../../assets/feedBack-animation.json';
+import { useNavigate } from 'react-router-dom';
 
 const FeedbackPage = () => {
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const id = localStorage.getItem("user_id")
     const token =Cookies.get("token")
@@ -43,6 +45,7 @@ const FeedbackPage = () => {
             const data = await response.json();
             console.log('Feedback submitted successfully:', data);
             alert('Feedback submitted successfully')
+            navigate(0)
         } catch (error) {
             console.error('Error during feedback submission:', error);
         }

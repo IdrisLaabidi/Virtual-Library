@@ -36,7 +36,7 @@ const ErrorPage = () => {
                             <ul className='mt-4 max-w-md text-left text-2xl space-y-2 list-disc list-inside'>
                                 <li>Make sure that the URL is correct.</li>
                                 <li>Check your internet connection.</li>
-                                <li>The page you're looking for might have been removed.</li>
+                                <li>The page you're looking for might have been removed or is currently undergoing updates.</li>
                             </ul>
                         </div>
                     }

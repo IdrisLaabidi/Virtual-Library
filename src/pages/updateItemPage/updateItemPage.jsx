@@ -134,6 +134,7 @@ const UpdateItemPage = () => {
       console.log(data.message);
       if(response.ok){
         alert("item updated successfully")
+        navigate('/MyLibrary')
       }
       if(!response.ok){
         alert("failed to load item")
