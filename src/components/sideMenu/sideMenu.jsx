@@ -1,8 +1,12 @@
 import React from 'react';
 import SideMenuItem from '../sideMenuItem/sideMenuItem';
 import logo from '../../assets/logo.jpeg'
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'cookies-js';
 
 const SideMenu = ({ open, toggleSideMenu }) => {
+
+  const navigate=useNavigate()
   const itemsArray = ['Home', 'My Account', 'My Library', 'Feedback', 'Settings'];
 
   // Add classes to control the visibility of the side menu
@@ -22,6 +26,13 @@ const SideMenu = ({ open, toggleSideMenu }) => {
             </li>
           ))}
         </ul>
+        <div className=''>
+          <button onClick={() => {
+            localStorage.removeItem('user_id');
+            Cookies.remove('token');
+            navigate('/');
+          }}>logout</button>
+        </div>
       </div>
     </aside>
   );

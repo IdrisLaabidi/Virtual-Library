@@ -7,12 +7,25 @@ import welcomeAnimation from '../../assets/welcome-animation';
 import book1 from '../../assets/The_Man_in_the_High_Castle_(1962).jpg'
 import book2 from '../../assets/Les_Miserables.jpg'
 import book3 from '../../assets/The_Lord_of_The_Rings.jpg'
+import Cookies from 'cookies-js';
 const LandingPage = () => {
+  const token = Cookies.get('token')
+  const userId = localStorage.getItem('user_id')
   const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(() => {
     const theme = localStorage.getItem('theme');
     return theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
+
+  useEffect(() => {
+    if(token && userId){
+      navigate('/home')
+    }
+    if(userId && !token){
+      alert('Session expired')
+      navigate('/login')
+    }
+  },[])
 
   useEffect(() => {
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
@@ -59,9 +72,9 @@ const LandingPage = () => {
           <h1 className="text-3xl font-semibold text-gray-800 dark:text-white">Virtual Library</h1>
           <nav>
             <ul className="flex space-x-24">
-              <li><a href="#" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">About</a></li>
+              <li><a href="/aboutUs" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">About</a></li>
               <li><a href="#" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Blog</a></li>
-              <li><a href="#" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Contact Us</a></li>
+              <li><a href="/contactUs" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Contact Us</a></li>
             </ul>
           </nav>
           <div className="flex space-x-4">

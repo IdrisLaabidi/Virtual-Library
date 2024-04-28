@@ -48,7 +48,7 @@ const ItemCard = ({item,collection}) => {
                                         Delete
                             </button>
                             <button 
-                                        className="text-red-700 hover:text-red-500 font-semibold border border-red-700 hover:border-red-500 p-1 rounded-lg mt-3"
+                                        className=" text-[#EBAD34] hover:text-[#ebae34d2] font-semibold border border-[#EBAD34] hover:border-[#ebae34d2] p-1 rounded-lg mt-3"
                                         onClick={() => {navigate('/MyLibrary/updateItem/'+item._id)}}
                                         >   
                                         Edit

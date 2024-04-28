@@ -2,12 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Lottie from 'react-lottie';
-import readingAnimation from '../../assets/reading-animation';
-import loginAnimation from '../../assets/login-animation';
 import welcomeAnimation from '../../assets/welcome-animation';
-import book1 from '../../assets/The_Man_in_the_High_Castle_(1962).jpg'
-import book2 from '../../assets/Les_Miserables.jpg'
-import book3 from '../../assets/The_Lord_of_The_Rings.jpg'
+
 const Home = () => {
   const navigate = useNavigate();
   const welcomeLottieAnimationOption = {

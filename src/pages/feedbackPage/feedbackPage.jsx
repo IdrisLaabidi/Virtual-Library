@@ -19,8 +19,8 @@ const FeedbackPage = () => {
 
         const feedBack = {
             user:id,
-            firstname:firstname,
-            lastname:lastname,
+            firstName:firstname,
+            lastName:lastname,
             email:email,
             message:message,
         };
@@ -42,6 +42,7 @@ const FeedbackPage = () => {
 
             const data = await response.json();
             console.log('Feedback submitted successfully:', data);
+            alert('Feedback submitted successfully')
         } catch (error) {
             console.error('Error during feedback submission:', error);
         }
@@ -59,18 +60,18 @@ const FeedbackPage = () => {
     return (
         <div className="container mx-auto py-8">
             <div className="h-10"></div>
-            <h2 className="text-3xl font-bold mb-4 ml-44">Give us your Feedback!</h2>
+            <h2 className="text-3xl font-bold mb-4 ml-44 dark:text-white">Give us your Feedback!</h2>
             <div className="h-20"></div>
             <div className="flex gap-5 max-h-96 h-fit">
                 <div className='w-1/2'>
                 <form className="w-full" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" htmlFor="grid-first-name">
                                 First Name
                             </label>
                             <input
-                                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border dark:bg-gray-600 dark:border-gray-500 dark:text-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 id="grid-first-name"
                                 type="text"
                                 placeholder="Your first name"
@@ -79,11 +80,11 @@ const FeedbackPage = () => {
                             />
                         </div>
                         <div className="w-full md:w-1/2 px-3">
-                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" htmlFor="grid-last-name">
                                 Last Name
                             </label>
                             <input
-                                className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border dark:bg-gray-600 dark:border-gray-500 dark:text-white rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                 id="grid-last-name"
                                 type="text"
                                 placeholder="Your last name"
@@ -93,11 +94,11 @@ const FeedbackPage = () => {
                         </div>
                     </div>
                     <div className="mb-6">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-email">
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" htmlFor="grid-email">
                             E-mail
                         </label>
                         <input
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 border dark:bg-gray-600 dark:border-gray-500 dark:text-white rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-email"
                             type="email"
                             placeholder="example@gmail.com"
@@ -106,11 +107,11 @@ const FeedbackPage = () => {
                         />
                     </div>
                     <div className="mb-6 flex flex-col">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-feedback">
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-white" htmlFor="grid-feedback">
                             Your message
                         </label>
                         <textarea
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white "
                             id="grid-feedback"
                             rows="4"
                             placeholder="Write your message here"

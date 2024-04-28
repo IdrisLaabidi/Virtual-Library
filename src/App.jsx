@@ -12,6 +12,9 @@ import LandingPage from './pages/landingPage/landingPage'
 import NewCollection from './pages/addCollection/addCollection';
 import ViewItem from './pages/viewItem/ItemPage';
 import UpdateItemPage from './pages/updateItemPage/updateItemPage';
+import ErrorPage from './pages/errorPage/errorPage';
+import FeedbackPage from './pages/feedbackPage/feedbackPage';
+import AboutUs from './pages/aboutUs/aboutUs';
 
 function App() {
   return (
@@ -29,7 +32,10 @@ function App() {
           <Route path="MyLibrary/viewCollection/:collectionId" element={<Layout children={<ViewCollection/>}/>}/>
           <Route path="MyLibrary/viewItem/:itemId" element={<Layout children={<ViewItem/>}/>}/>
           <Route path="MyLibrary/updateItem/:itemId" element={<Layout children={<UpdateItemPage/>}/>}/>
-          <Route path="*" element={<div>error</div>} />
+          <Route path="/feedback" element={<Layout children={<FeedbackPage/>}/>}/>
+          <Route path="/contactUs" element={<FeedbackPage/>}/>
+          <Route path="/aboutUs" element={<AboutUs/>}/>
+          <Route path="*" element={<ErrorPage/>} />
         </Routes>
       </BrowserRouter>
     </> 
