@@ -64,15 +64,15 @@ import { useNavigate } from 'react-router-dom'
           </div>
         </div>
       </header>
-        <section class="py-10 bg-gray-100 sm:py-16 lg:py-24 ">
-        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <section class="py-10 bg-gray-100 sm:py-16 lg:py-24 dark:bg-[#141a28] ">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 dark:bg-[#141a28]">
             <div class="max-w-2xl mx-auto text-center">
-                <h2 class="text-3xl font-bold leading-tight text-gray-800 sm:text-4xl lg:text-5xl">Welcome our <span class="text-blue-600">Creative</span> team</h2>
+                <h2 class="text-3xl font-bold leading-tight text-gray-800 sm:text-4xl lg:text-5xl dark:text-white">Welcome our <span class="text-blue-600">Creative</span> team</h2>
             </div>
 
             <div class="grid max-w-xl grid-cols-1 mx-auto mt-8 text-center lg:max-w-full sm:mt-12 lg:mt-20 lg:grid-cols-4 gap-x-6 xl:gap-x-12 gap-y-6 ">
-                <div class="overflow-hidden bg-white rounded-md shadow">
-                    <div class="px-8 py-12">
+                <div class="overflow-hidden bg-white rounded-md shadow dark:bg-gray-700">
+                    <div class="px-8 py-12 dark:bg-gray-700">
                         <div class="relative w-24 h-24 mx-auto">
                             <img class="relative object-cover w-24 h-24 mx-auto rounded-full" src={idris} alt="" />
                             <div class="absolute top-0 right-0 flex items-center justify-center bg-blue-600 rounded-full w-7 h-7">
@@ -84,15 +84,15 @@ import { useNavigate } from 'react-router-dom'
                             </div>
                         </div>
                         <blockquote class="mt-7">
-                            <p class="text-lg text-black">“This project seamlessly integrates modern technology, including film viewing and music listening, with the timeless pursuit of reading.”</p>
+                            <p class="text-lg text-black dark:text-white">“This project seamlessly integrates modern technology, including film viewing and music listening, with the timeless pursuit of reading.”</p>
                         </blockquote>
-                        <p class="text-base font-semibold tex-tblack mt-9">Idris Laabidi</p>
-                        <p class="mt-1 text-base text-gray-600">Computer Science Student</p>
+                        <p class="text-base font-semibold tex-tblack mt-9 dark:text-white">Idris Laabidi</p>
+                        <p class="mt-1 text-base text-gray-600 dark:text-white">Computer Science Student</p>
                     </div>
                 </div>
 
-                <div class="overflow-hidden bg-white rounded-md shadow">
-                    <div class="px-8 py-12">
+                <div class="overflow-hidden bg-white rounded-md shadow dark:bg-gray-700">
+                    <div class="px-8 py-12 dark:bg-gray-700">
                         <div class="relative w-24 h-24 mx-auto">
                             <img class="relative object-cover w-24 h-24 mx-auto rounded-full" src={rayen} alt="" />
                             <div class="absolute top-0 right-0 flex items-center justify-center bg-blue-600 rounded-full w-7 h-7">
@@ -104,15 +104,15 @@ import { useNavigate } from 'react-router-dom'
                             </div>
                         </div>
                         <blockquote class="mt-7">
-                            <p class="text-lg text-black">“Programmed with React, a JavaScript library, this project has been optimized to facilitate smoother and more efficient development processes.”</p>
+                            <p class="text-lg text-black dark:text-white">“Programmed with React, a JavaScript library, this project has been optimized to facilitate smoother and more efficient development processes.”</p>
                         </blockquote>
-                        <p class="text-base font-semibold tex-tblack mt-9">Rayen Miri</p>
-                        <p class="mt-1 text-base text-gray-600">Computer Science Student</p>
+                        <p class="text-base font-semibold tex-tblack mt-9 dark:text-white">Rayen Miri</p>
+                        <p class="mt-1 text-base text-gray-600 dark:text-white">Computer Science Student</p>
                     </div>
                 </div>
 
-                <div class="overflow-hidden bg-white rounded-md shadow">
-                    <div class="px-8 py-12">
+                <div class="overflow-hidden bg-white rounded-md shadow dark:bg-gray-700">
+                    <div class="px-8 py-12 dark:bg-gray-700">
                         <div class="relative w-24 h-24 mx-auto">
                             <img class="relative object-cover w-24 h-24 mx-auto rounded-full" src={tass} alt="" />
                             <div class="absolute top-0 right-0 flex items-center justify-center bg-blue-600 rounded-full w-7 h-7">
@@ -124,15 +124,15 @@ import { useNavigate } from 'react-router-dom'
                             </div>
                         </div>
                         <blockquote class="mt-7">
-                            <p class="text-lg text-black">“With a keen focus on user experience, the website has been meticulously crafted with user-friendly interfaces designed to inspire people to delve deeper into books, films, and music.”</p>
+                            <p class="text-lg text-black dark:text-white">“With a keen focus on user experience, the website has been meticulously crafted with user-friendly interfaces designed to inspire people to delve deeper into books, films, and music.”</p>
                         </blockquote>
-                        <p class="text-base font-semibold tex-tblack mt-9">Tasnime benboubaker</p>
-                        <p class="mt-1 text-base text-gray-600">Computer Science Student</p>
+                        <p class="text-base font-semibold tex-tblack mt-9 dark:text-white">Tasnime benboubaker</p>
+                        <p class="mt-1 text-base text-gray-600 dark:text-white">Computer Science Student</p>
                     </div>
                 </div>
 
-                <div class="overflow-hidden bg-white rounded-md shadow">
-                    <div class="px-8 py-12">
+                <div class="overflow-hidden bg-white rounded-md shadow dark:bg-gray-700">
+                    <div class="px-8 py-12 dark:bg-gray-700">
                         <div class="relative w-24 h-24 mx-auto">
                             <img class="relative object-cover w-24 h-24 mx-auto rounded-full" src={joe} alt="" />
                             <div class="absolute top-0 right-0 flex items-center justify-center bg-blue-600 rounded-full w-7 h-7">
@@ -144,10 +144,10 @@ import { useNavigate } from 'react-router-dom'
                             </div>
                         </div>
                         <blockquote class="mt-7">
-                            <p class="text-lg text-black">“This project is dedicated to a noble cause: promoting reading, which faces the threat of obsolescence in today's internet-dominated world.”</p>
+                            <p class="text-lg text-black dark:text-white">“This project is dedicated to a noble cause: promoting reading, which faces the threat of obsolescence in today's internet-dominated world.”</p>
                         </blockquote>
-                        <p class="text-base font-semibold tex-tblack mt-9">Youssef Fathallah</p>
-                        <p class="mt-1 text-base text-gray-600">Computer Science Student</p>
+                        <p class="text-base font-semibold tex-tblack mt-9 dark:text-white">Youssef Fathallah</p>
+                        <p class="mt-1 text-base text-gray-600 dark:text-white">Computer Science Student</p>
                     </div>
                 </div>
             </div>
