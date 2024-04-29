@@ -55,6 +55,7 @@ const UserBookshelf = () => {
             })
             if(response.ok){
                 alert('shared')
+                navigate(0)
             }
             if(!response.ok){
                 alert('error')
@@ -79,6 +80,7 @@ const UserBookshelf = () => {
                 throw new Error('Network response was not ok');
             }
             alert('Collection deleted successfuly!')
+            navigate(0)
 
             // Refresh the page or update the state here to reflect the deletion
         } catch (error) {
