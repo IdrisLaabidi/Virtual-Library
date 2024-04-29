@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SideMenuItem from '../sideMenuItem/sideMenuItem';
 import logo from '../../assets/logo.jpeg'
+import logout from '../../assets/logout.svg'
+import setting from '../../assets/setting.svg'
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'cookies-js';
+import Cookies from 'js-cookie';
+import { useMemo,useState } from 'react';
 
 const SideMenu = ({ open, toggleSideMenu }) => {
 
   const navigate=useNavigate()
-  const itemsArray = ['Home', 'My Account', 'My Library', 'Feedback', 'Settings'];
+  const itemsArray = ['Home', 'My Account', 'My Library', 'Feedback'];
 
   // Add classes to control the visibility of the side menu
   const sideMenuClasses = open ? 'block' : 'hidden';
@@ -19,19 +22,28 @@ const SideMenu = ({ open, toggleSideMenu }) => {
           <img className="hidden h-16 lg:block rounded-xl " alt="Logo" src={logo}/>
           <span className="text-2xl font-semibold">Virtual Library</span>
         </div>
-        <ul className="space-y-2">
+        <ul className="space-y-2 pb-[300px]">
           {itemsArray.map((item, index) => (
             <li key={index}>
               <SideMenuItem item={item} itemLink={'/'+item.split(' ').join('')} />
             </li>
           ))}
         </ul>
-        <div className=''>
+        <div className='flex gap-3 justify-center mt'>
           <button onClick={() => {
             localStorage.removeItem('user_id');
-            Cookies.remove('token');
+            Cookies.remove('token')
             navigate('/');
-          }}>logout</button>
+            console.log('here')
+          }}>
+            <img src={logout} className=' w-7 h-7' title='logout'></img>
+          </button>
+          <button onClick={() => {
+            navigate('/setting');
+          }}>
+            <img src={setting} className=' w-7 h-7' title='settings'></img>
+        
+          </button>
         </div>
       </div>
     </aside>
