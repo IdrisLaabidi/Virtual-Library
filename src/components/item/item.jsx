@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import deleteIcon from '../../assets/delete-icon.svg'
 import Cookies from 'js-cookie'
+import useFetch from '../../Hooks/useFetch'
 const token = Cookies.get("token")
 
 const ItemCard = ({item,collection}) => {
     const navigate = useNavigate()
     const userId = localStorage.getItem('user_id')
+    console.log(item.group)
     const handleDelete = async () => {
         try {
             const response = await fetch(`http://localhost:4000/api/item/${item._id}`, {
@@ -27,6 +29,25 @@ const ItemCard = ({item,collection}) => {
             alert('Failed to delete item!')
         }
     };
+    const fetchCollection = async () => {
+        const response = await fetch(`http://localhost:4000/api/collection/${item.group}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer '+token,
+              },
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    
+        // Use the json() method to parse the response data as JSON
+        const data = await response.json();
+    
+        // Now you can use the data from the response
+        console.log(data);
+    }
+    const itemCollection = fetchCollection();
+    console.log(itemCollection)
   
     return ( <div className="flex-col  justify-center items-center w-fit">
         <div key={item._id} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
@@ -56,5 +77,5 @@ const ItemCard = ({item,collection}) => {
                         </div>
     </div> );
 }
- 
+
 export default ItemCard;

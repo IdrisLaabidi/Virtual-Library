@@ -26,7 +26,7 @@ import joe from '../../assets/joe.jpg'
                             </div>
                         </div>
                         <blockquote class="mt-7">
-                            <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat”</p>
+                            <p class="text-lg text-black">“This project seamlessly integrates modern technology, including film viewing and music listening, with the timeless pursuit of reading.”</p>
                         </blockquote>
                         <p class="text-base font-semibold tex-tblack mt-9">Idris Laabidi</p>
                         <p class="mt-1 text-base text-gray-600">Computer Science Student</p>
@@ -46,7 +46,7 @@ import joe from '../../assets/joe.jpg'
                             </div>
                         </div>
                         <blockquote class="mt-7">
-                            <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat”</p>
+                            <p class="text-lg text-black">“Programmed with React, a JavaScript library, this project has been optimized to facilitate smoother and more efficient development processes.”</p>
                         </blockquote>
                         <p class="text-base font-semibold tex-tblack mt-9">Rayen Miri</p>
                         <p class="mt-1 text-base text-gray-600">Computer Science Student</p>
@@ -66,7 +66,7 @@ import joe from '../../assets/joe.jpg'
                             </div>
                         </div>
                         <blockquote class="mt-7">
-                            <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat”</p>
+                            <p class="text-lg text-black">“With a keen focus on user experience, the website has been meticulously crafted with user-friendly interfaces designed to inspire people to delve deeper into books, films, and music.”</p>
                         </blockquote>
                         <p class="text-base font-semibold tex-tblack mt-9">Tasnime benboubaker</p>
                         <p class="mt-1 text-base text-gray-600">Computer Science Student</p>
@@ -86,7 +86,7 @@ import joe from '../../assets/joe.jpg'
                             </div>
                         </div>
                         <blockquote class="mt-7">
-                            <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat”</p>
+                            <p class="text-lg text-black">“This project is dedicated to a noble cause: promoting reading, which faces the threat of obsolescence in today's internet-dominated world.”</p>
                         </blockquote>
                         <p class="text-base font-semibold tex-tblack mt-9">Youssef Fathallah</p>
                         <p class="mt-1 text-base text-gray-600">Computer Science Student</p>

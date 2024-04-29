@@ -73,7 +73,7 @@ const LandingPage = () => {
           <nav>
             <ul className="flex space-x-24">
               <li><a href="/aboutUs" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">About</a></li>
-              <li><a href="#" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Blog</a></li>
+              <li><a href="/blog" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Blog</a></li>
               <li><a href="/contactUs" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Contact Us</a></li>
             </ul>
           </nav>
@@ -135,14 +135,14 @@ const LandingPage = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
               </svg>
               <h3 className="text-xl font-semibold mb-2">Download</h3>
-              <p className="text-gray-700">Download books instantly and enjoy reading on any device.</p>
+              <p className="text-gray-700">Instantly download books and delight in reading on any device.</p>
             </div>
             <div className="text-center">
               <svg className="w-12 h-12 mx-auto mb-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
               </svg>
               <h3 className="text-xl font-semibold mb-2">Read</h3>
-              <p className="text-gray-700">Read your favorite books online or offline at your convenience.</p>
+              <p className="text-gray-700">Read your favorite books online or offline at your leisure.</p>
             </div>
           </div>
           <div className="text-center">
@@ -177,14 +177,14 @@ const LandingPage = () => {
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.646 6.24c0-.691.493-1.306 1.336-1.306.756 0 1.313.492 1.313 1.236 0 .697-.469 1.23-.902 1.705l-2.971 3.293V12h5.344v-1.107H7.268v-.077l1.974-2.22.096-.107c.688-.763 1.287-1.428 1.287-2.43 0-1.266-1.031-2.215-2.613-2.215-1.758 0-2.637 1.19-2.637 2.402v.065h1.271v-.07Z"/>
                     </svg>
                     <h3 className="text-xl font-semibold mb-2">Explore</h3>
-                    <p className="text-gray-700">Explore a vast collection of books covering various genres and topics.</p>
+                    <p className="text-gray-700">Discover an extensive array of books spanning diverse genres and subjects.</p>
                 </div>
                 <div className="text-center md:text-left">
                     <svg className="w-12 h-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-3-circle-fill" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-8.082.414c.92 0 1.535.54 1.541 1.318.012.791-.615 1.36-1.588 1.354-.861-.006-1.482-.469-1.54-1.066H5.104c.047 1.177 1.05 2.144 2.754 2.144 1.653 0 2.954-.937 2.93-2.396-.023-1.278-1.031-1.846-1.734-1.916v-.07c.597-.1 1.505-.739 1.482-1.876-.03-1.177-1.043-2.074-2.637-2.062-1.675.006-2.59.984-2.625 2.12h1.248c.036-.556.557-1.054 1.348-1.054.785 0 1.348.486 1.348 1.195.006.715-.563 1.237-1.342 1.237h-.838v1.072h.879Z"/>
                     </svg>
                     <h3 className="text-xl font-semibold mb-2">Enjoy</h3>
-                    <p className="text-gray-700">Have fun reading your favorite books online or offline at your convenience.</p>
+                    <p className="text-gray-700">Enjoy reading your favorite books online or offline at your convenience.</p>
                 </div>
                 </div>
             </div>
@@ -202,7 +202,7 @@ const LandingPage = () => {
                     </div>
                     <div className={`bg-white shadow-md rounded-lg p-6 ${darkMode ? 'text-gray-800' : ''}`}>
                     <img src={book2} alt="Book Cover" className="mx-auto mb-4" style={{ maxWidth: '150px' }} />
-                    <h3 className="text-xl font-semibold mb-2">Les Miserables</h3>
+                    <h3 className="text-xl font-semibold mb-2">Les Misérables</h3>
                     <p className="text-gray-700">Victor Hugo</p>
                     </div>
                     <div className={`bg-white shadow-md rounded-lg p-6 ${darkMode ? 'text-gray-800' : ''}`}>
@@ -267,10 +267,16 @@ const LandingPage = () => {
         <div className="container mx-auto text-center">
             <h2 className="text-3xl font-semibold mb-4 text-gray-800 dark:text-white">Ready to Get Started?</h2>
             <div className='flex items-center justify-center space-x-[5%]'>
-              <button className='dark:text-white border-[2px] border-gray-600 dark:border-white rounded-[10px] px-4 py-[6px]'>
+              <button 
+                className='dark:text-white border-[2px] border-gray-600 dark:border-white rounded-[10px] px-4 py-[6px]'
+                onClick={()=>{navigate('/login')}}
+              >
                 Login
               </button>
-              <button className='bg-blue-600 hover:bg-blue-700 rounded-[10px] px-4 py-2 text-white'>
+              <button 
+                className='bg-blue-600 hover:bg-blue-700 rounded-[10px] px-4 py-2 text-white'
+                onClick={()=>{navigate('/register')}}
+              >
                 Sign Up
               </button>
             </div>
