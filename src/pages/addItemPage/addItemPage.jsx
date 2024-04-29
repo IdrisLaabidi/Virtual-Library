@@ -17,6 +17,7 @@ const CreateItemPage = () => {
   const [duree, setDuree] = useState('');
   const [price, setPrice] = useState('');
   const [itemPicture , setItemPicture] = useState("")
+  const [pdfFile, setPdfFile] = useState(null);
   const types = ['image/png', 'image/jpeg']; // image types
   const userId = localStorage.getItem('user_id')
   const token = Cookies.get("token")
@@ -53,6 +54,7 @@ const CreateItemPage = () => {
           price,
           pageNumber: pages,
           itemPicture : itemPicture,
+          itemFile : pdfFile
         }
       }   
       } else {
@@ -119,8 +121,17 @@ const CreateItemPage = () => {
     if (file) {
         reader.readAsDataURL(file);
     }
-};
-
+  };
+  const handlePdfChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      setPdfFile(file);
+    } else {
+      alert('Please select a valid PDF file.');
+      setPdfFile(null);
+    }
+  };
+  
   return (
     <div 
       className="p-6 space-y-4 md:space-y-6 sm:p-8 md:max-h-screen "
@@ -169,6 +180,20 @@ const CreateItemPage = () => {
                   
                 />
             </div>
+                <div className='w-3/4'>
+                  <label htmlFor="pdf" className="flex justify-start mb-2 text-sm font-medium dark:text-white">
+                    Upload PDF
+                  </label>
+                  <input
+                    type="file"
+                    name="pdf"
+                    id="pdf"
+                    accept="application/pdf"
+                    onChange={handlePdfChange}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-600 dark:border-gray-500 dark:text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    required
+            />
+          </div>
         <div>
           <div className='mb-4 dark:text-white'>Item Type:</div>
           <label>
