@@ -3,6 +3,8 @@ import SideMenuItem from '../sideMenuItem/sideMenuItem';
 import logo from '../../assets/logo.jpeg'
 import logout from '../../assets/logout.svg'
 import setting from '../../assets/setting.svg'
+import setting2 from '../../assets/setting-dark.svg'
+import logout2 from '../../assets/logout-dark.svg'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useMemo,useState } from 'react';
@@ -10,8 +12,17 @@ import { useMemo,useState } from 'react';
 const SideMenu = ({ open, toggleSideMenu }) => {
 
   const navigate=useNavigate()
+  const [isDark ,setIsDark] = useState()
   const itemsArray = ['Home', 'My Account', 'My Library', 'Feedback'];
 
+  useEffect(() => {window.addEventListener("switch", (e) => {
+    // Handle changes here
+    console.log("Change to the theme");
+    const theme = localStorage.getItem('theme')
+    setIsDark(theme)
+    console.log(isDark)
+    }
+  )},[])
   // Add classes to control the visibility of the side menu
   const sideMenuClasses = open ? 'block' : 'hidden';
 
@@ -36,12 +47,12 @@ const SideMenu = ({ open, toggleSideMenu }) => {
             navigate('/');
             console.log('here')
           }}>
-            <img src={logout} className=' w-7 h-7' title='logout'></img>
+            {isDark === 'dark' ? <img src={logout} className=' w-7 h-7' title='logout'></img> : <img src={logout2} className=' w-7 h-7' title='logout'></img> }
           </button>
           <button onClick={() => {
             navigate('/setting');
           }}>
-            <img src={setting} className=' w-7 h-7' title='settings'></img>
+           {isDark === 'dark' ? <img src={setting} className=' w-7 h-7' title='settings'></img> : <img src={setting2} className=' w-7 h-7' title='settings'></img>}
         
           </button>
         </div>

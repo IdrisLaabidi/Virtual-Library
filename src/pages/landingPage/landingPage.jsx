@@ -40,6 +40,7 @@ const LandingPage = () => {
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
+
   const readingLottieAnimationOption = {
     loop: true,
     autoplay: true,
@@ -67,12 +68,12 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="py-4 shadow-md bg-white dark:bg-gray-800">
+      <header className="py-4 shadow-md bg-white dark:bg-gray-800 top-0 z-[1000] fixed w-full">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-3xl font-semibold text-gray-800 dark:text-white">Virtual Library</h1>
           <nav>
             <ul className="flex space-x-24">
-              <li><a href="/aboutUs" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">About</a></li>
+              <li><a href="/aboutUs" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">About Us</a></li>
               <li><a href="/blog" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Blog</a></li>
               <li><a href="/contactUs" className="text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">Contact Us</a></li>
             </ul>

@@ -15,6 +15,7 @@ import UpdateItemPage from './pages/updateItemPage/updateItemPage';
 import ErrorPage from './pages/errorPage/errorPage';
 import FeedbackPage from './pages/feedbackPage/feedbackPage';
 import AboutUs from './pages/aboutUs/aboutUs';
+import ContactUs from './pages/contactUs/feedbackPage';
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
           <Route path="MyLibrary/viewItem/:itemId" element={<Layout children={<ViewItem/>}/>}/>
           <Route path="MyLibrary/updateItem/:itemId" element={<Layout children={<UpdateItemPage/>}/>}/>
           <Route path="/feedback" element={<Layout children={<FeedbackPage/>}/>}/>
-          <Route path="/contactUs" element={<FeedbackPage/>}/>
+          <Route path="/contactUs" element={<ContactUs/>}/>
           <Route path="/aboutUs" element={<AboutUs/>}/>
           <Route path="*" element={<ErrorPage/>} />
         </Routes>

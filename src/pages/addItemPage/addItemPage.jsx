@@ -29,7 +29,7 @@ const CreateItemPage = () => {
       setCollection(userCollectionData);
 
   }, [isPending,userCollectionData]);
-  console.log(collection)
+
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -77,8 +77,9 @@ const CreateItemPage = () => {
         }
         }
       }
-    console.log(item)
+   
     try {
+      console.log(pdfFile)
       const response = await fetch('http://localhost:4000/api/item', {
         method: 'POST',
         headers: {
@@ -87,6 +88,16 @@ const CreateItemPage = () => {
         },
         body: JSON.stringify(item),
       });
+
+      /*const uploadres = await fetch('http://localhost:4000/api/item/upload', {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'Bearer '+token,
+            'Content-Type': 'application/octet-stream',
+        },
+        body: pdfFile,
+    });*/
+
       if (response.ok){
         alert('item created')
         navigate('/MyLibrary')

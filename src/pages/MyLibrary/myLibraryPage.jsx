@@ -24,10 +24,6 @@ const MyLibraryPage = () => {
 
             {/* Search and filter options */}
             <div className="w-full flex justify-between items-center gap-3 p-2">
-                <div className="flex-grow flex items-center gap-3">
-                    <img className="h-8 w-8" alt="search icon" src={search} />
-                    <input className="flex-grow rounded-md border border-gray-300 p-2 dark:bg-gray-700 dark:text-white" placeholder='Search per collection name' />
-                </div>
                 <div className="flex items-center gap-2">
                     {/* Other buttons for sorting and filtering can be added here */}
                 </div>

@@ -46,7 +46,7 @@ const ErrorPage = () => {
                     </button>
                     <button 
                         className='mt-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-                        onClick={() => {navigate('/home')}}
+                        onClick={() => {navigate('/')}}
                         >Go to homepage</button> 
                 </div>
             </div> 
