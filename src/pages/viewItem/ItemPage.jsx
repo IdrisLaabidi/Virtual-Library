@@ -35,7 +35,7 @@ const ViewItem = () => {
             </div>
             <div className=" w-3/5">
                 <div className="flex gap-5 justify-start items-center pb-5">
-                    <h2 className="text-[#4BC1D2] font-bold text-3xl ">collection name</h2>
+                    <h2 className="text-[#4BC1D2] font-bold text-3xl ">Harry Potter</h2>
                     <div className="bg-[#D9D9D9] p-1 w-16 rounded-md shadow-md text-center ">{item.type}</div>
                 </div>
                 <h1 className="text-[#000000] font-bold text-3xl  dark:text-white w-full">{item.titre}</h1>

@@ -26,7 +26,7 @@ const Home = () => {
                     width={400}
                 />
           <p className="text-lg mb-8 text-white">Discover, upload, and read thousands of books online</p>
-          <a href="/newItem" className="font-semibold py-2 px-6 rounded-full text-blue-500 bg-white hover:bg-blue-400 hover:text-white dark:text-gray-800 dark:bg-white dark:hover:bg-blue-400 dark:hover:text-white transition duration-300">
+          <a href="/MyLibrary/AddNewCollection" className="font-semibold py-2 px-6 rounded-full text-blue-500 bg-white hover:bg-blue-400 hover:text-white dark:text-gray-800 dark:bg-white dark:hover:bg-blue-400 dark:hover:text-white transition duration-300">
             Get Started
           </a>
         </div>
